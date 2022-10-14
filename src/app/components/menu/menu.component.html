@@ -1,0 +1,50 @@
+<ion-menu contentId="main" menuId="menu">
+  <ion-header>
+    <ion-toolbar color="tertiary">
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+
+      <!-- Administrador -->
+      <ion-menu-toggle *ngIf="isLogged && isAdmin">
+        <ion-item routerLink="/listarsocios">
+          <ion-icon name="people-outline" slot="start"></ion-icon>
+          <ion-label>Listar socios</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle *ngIf="isLogged && isAdmin">
+        <ion-item routerLink="/listarusuarios">
+          <ion-icon name="people-outline" slot="start"></ion-icon>
+          <ion-label>Listar usuarios</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle *ngIf="isLogged && isAdmin">
+        <ion-item routerLink="/listarmedidores">
+          <ion-icon name="scale-outline" slot="start"></ion-icon>
+          <ion-label>Listar medidores</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
+      <!-- Usuario general -->
+      <ion-menu-toggle *ngIf="isLogged && !isAdmin">
+        <ion-item routerLink="/listarmedidoresuser">
+          <ion-icon name="scale-outline" slot="start"></ion-icon>
+          <ion-label>Mis medidores</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
+      <!-- Global -->
+      <ion-menu-toggle *ngIf="isLogged">
+        <ion-item (click)="cerrarSesion()">
+          <ion-icon name="log-out-outline" slot="start"></ion-icon>
+          <ion-label>Cerrar sesion</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+      
+    </ion-list>
+  </ion-content>
+</ion-menu>

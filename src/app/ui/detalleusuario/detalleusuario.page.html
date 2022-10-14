@@ -1,0 +1,43 @@
+<app-header title="Detalles del usuario"></app-header>
+
+<ion-content *ngIf="usuario">
+
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title> <strong>Usuario: </strong> {{usuario.usuario}} </ion-card-title>
+            <ion-card-title> <strong>Password: </strong> {{usuario.password}} </ion-card-title>
+            <ion-card-title> <strong>Socio: </strong> {{usuario.socio.nombres}} </ion-card-title>
+            <ion-card-title> <strong>Roles: </strong> </ion-card-title>
+
+            <ion-card *ngFor="let rol of roles">
+
+                <ion-item-sliding>
+                  <!-- Roles -->
+                  <ion-item>
+                    <ion-label>
+                      {{rol}}
+                    </ion-label>
+                  </ion-item>
+              
+                </ion-item-sliding>
+              
+              </ion-card>
+            
+        </ion-card-header>
+    </ion-card>
+
+</ion-content>
+
+<ion-content *ngIf="!usuario">
+
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title> <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text> </ion-card-title>
+            <ion-card-title> <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text> </ion-card-title>
+            <ion-card-title> <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text> </ion-card-title>
+            <ion-card-title> <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text> </ion-card-title>
+            <ion-card-title> <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text> </ion-card-title>
+        </ion-card-header>
+    </ion-card>
+
+</ion-content>

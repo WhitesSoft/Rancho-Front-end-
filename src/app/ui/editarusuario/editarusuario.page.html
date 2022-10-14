@@ -1,0 +1,50 @@
+<app-header title="Editar usuario"></app-header>
+
+<ion-content *ngIf="usuario">
+
+    <ion-card>
+
+        <form #f="ngForm" (ngSubmit)="actualizarUsuario()"  novalidate>
+            <ion-list lines="full" class="ion-no-margin ion-no-padding">
+    
+                <ion-item>
+                    <ion-label position="floating">Usuario: <ion-text color="danger">*</ion-text>
+                    </ion-label>
+                    <ion-input required type="text" name="usuario" [(ngModel)]="usuario.usuario"></ion-input>
+                </ion-item>
+    
+                <ion-item>
+                    <ion-label position="floating">Password: <ion-text color="danger">*</ion-text>
+                    </ion-label>
+                    <ion-input required type="text" name="password" [(ngModel)]="usuario.password"></ion-input>
+                </ion-item>
+
+                <!-- Roles -->
+                <ion-card>
+                    <ion-list>
+                        <ion-item>
+                          <ion-select (ionChange)="handleChange($event)" name="rolSelected" [(ngModel)]="rolSelected" placeholder="Roles" [multiple]="true">
+                            <ion-select-option value="ADMINISTRADOR">ADMINISTRADOR</ion-select-option>
+                            <ion-select-option value="CAJERO">CAJERO</ion-select-option>
+                            <ion-select-option value="LECTURADOR">LECTURADOR</ion-select-option>
+                            <ion-select-option value="PLOMERO">PLOMERO</ion-select-option>
+                            <ion-select-option value="USER">USER</ion-select-option>
+                          </ion-select>
+                        </ion-item>
+                    </ion-list>
+                </ion-card>
+    
+                <div class="ion-padding">
+                    <ion-button color="success" expand="block" type="submit" class="ion-no-margin" [disabled]="!f.valid">
+                        <ion-icon name="create" slot="icon-only"></ion-icon>
+                        Actualizar
+                    </ion-button>
+                </div>
+        
+            </ion-list>
+        </form>
+
+    </ion-card>
+
+
+</ion-content>

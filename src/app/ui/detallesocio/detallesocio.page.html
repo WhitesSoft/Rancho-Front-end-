@@ -1,0 +1,31 @@
+<app-header title="Informacion del socio"></app-header>
+
+<ion-content *ngIf="socio">
+
+    <ion-card>
+        <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+        <ion-card-header>
+            <ion-card-title> <strong>Nombres: </strong> {{socio.nombres}} </ion-card-title>
+            <ion-card-title> <strong>Apellidos: </strong> {{socio.apellidos}} </ion-card-title>
+            <ion-card-title> <strong>Correo: </strong> {{socio.correo}} </ion-card-title>
+            <ion-card-title> <strong>Fecha de nacimiento: </strong> {{socio.fechaNacimiento}} </ion-card-title>
+            <ion-card-title> <strong>Direccion: </strong> {{socio.direccion}} </ion-card-title>
+        </ion-card-header>
+    </ion-card>
+
+</ion-content>
+
+<ion-content *ngIf="!socio">
+
+    <ion-card>
+        <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+        <ion-card-header>
+            <ion-card-title> <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text> </ion-card-title>
+            <ion-card-title> <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text> </ion-card-title>
+            <ion-card-title> <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text> </ion-card-title>
+            <ion-card-title> <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text> </ion-card-title>
+            <ion-card-title> <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text> </ion-card-title>
+        </ion-card-header>
+    </ion-card>
+
+</ion-content>
