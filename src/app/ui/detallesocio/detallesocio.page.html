@@ -10,7 +10,26 @@
             <ion-card-title> <strong>Correo: </strong> {{socio.correo}} </ion-card-title>
             <ion-card-title> <strong>Fecha de nacimiento: </strong> {{socio.fechaNacimiento}} </ion-card-title>
             <ion-card-title> <strong>Direccion: </strong> {{socio.direccion}} </ion-card-title>
+            <ion-card-title> <strong>Cantidad de medidores: </strong> {{totalMedidores}} </ion-card-title>
         </ion-card-header>
+    </ion-card>
+
+    <ion-card>
+        <div class="ion-padding">
+            <ion-button color="success" expand="block" type="submit" class="ion-no-margin" routerLink="/crearmedidor/{{socio.idSocio}}">
+                <ion-icon name="add-circle-outline" slot="icon-only"></ion-icon>
+                Asignar medidor
+            </ion-button>
+        </div>
+    </ion-card>
+
+    <ion-card>
+        <div class="ion-padding">
+            <ion-button *ngIf="totalMedidores>0" color="danger" expand="block" (click)="borrarConfirm(socio.idSocio)" class="ion-no-margin">
+                <ion-icon name="add-circle-outline" slot="icon-only"></ion-icon>
+                Eliminar todos sus medidores
+            </ion-button>
+        </div>
     </ion-card>
 
 </ion-content>
@@ -29,3 +48,4 @@
     </ion-card>
 
 </ion-content>
+

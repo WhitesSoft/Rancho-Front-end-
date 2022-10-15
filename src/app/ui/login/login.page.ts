@@ -31,6 +31,8 @@ export class LoginPage implements OnInit {
 
   ionViewWillEnter() {
     this.testLogged();
+    this.usuario = '';
+    this.password = '';
   }
 
   iniciarSesion(): void {

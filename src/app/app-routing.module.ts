@@ -67,10 +67,24 @@ const routes: Routes = [
     canActivate: [guard], data: { requiredRoles: ['administrador'] }
   }, 
   {
+    path: 'crearmedidor/:id',
+    loadChildren: () => import('./ui/crearmedidor/crearmedidor.module').then( m => m.CrearmedidorPageModule)
+  },
+  {
+    path: 'detallemedidor/:id',
+    loadChildren: () => import('./ui/detallemedidor/detallemedidor.module').then( m => m.DetallemedidorPageModule)
+  },
+  {
+    path: 'editarmedidor/:id',
+    loadChildren: () => import('./ui/editarmedidor/editarmedidor.module').then( m => m.EditarmedidorPageModule)
+  },
+  {
     path: '**',
     redirectTo: 'login', 
     pathMatch: 'full'
   }
+  
+  
 ];
 
 @NgModule({

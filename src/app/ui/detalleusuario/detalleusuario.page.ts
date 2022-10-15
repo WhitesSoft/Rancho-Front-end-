@@ -19,7 +19,6 @@ export class DetalleusuarioPage implements OnInit {
     private usuarioService: UsuarioService, 
     private activatedRoute: ActivatedRoute, 
     private toastController: ToastController, 
-    private tokenService: TokenService
   ) { }
 
   ngOnInit() {

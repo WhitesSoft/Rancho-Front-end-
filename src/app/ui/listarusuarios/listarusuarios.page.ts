@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { Usuario } from 'src/app/models/usuario';
 import { UsuarioService } from 'src/app/service/usuario.service';
 
@@ -14,10 +14,15 @@ export class ListarusuariosPage implements OnInit {
 
   constructor(
     private usuarioService: UsuarioService, 
-    private toastController: ToastController
+    private toastController: ToastController, 
+    private alertController: AlertController
   ) { }
 
   ngOnInit() {
+    this.cargarLista();
+  }
+  
+  ionViewWillEnter() {
     this.cargarLista();
   }
 
@@ -27,9 +32,46 @@ export class ListarusuariosPage implements OnInit {
         this.usuarios = data;
       }, 
       err => {
-        this.presentToast(err.error.message);
+        this.presentToast(err.error.mensaje);
       }
     );
+  }
+
+  eliminarUsuario(id: number): void {
+    this.usuarioService.eliminarUsuario(Number(id)).subscribe(
+      data => {
+        this.presentToast(data.mensaje);
+        this.cargarLista();
+      }, 
+      err => {
+        this.presentToast(err.error.mensaje);
+      }
+    );
+  }
+
+  async borrarConfirm(id: Number) {
+    const alert = await this.alertController.create({
+      header: 'Confirmar',
+      message: '¿Seguro que lo deseas eliminar?',
+      buttons: [
+        {
+          text: 'Aceptar',
+          handler: () => {
+            this.eliminarUsuario(Number(id));
+          }
+        },
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   async presentToast(msj: string) {

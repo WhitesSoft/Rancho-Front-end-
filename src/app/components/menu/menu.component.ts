@@ -22,6 +22,10 @@ export class MenuComponent implements OnInit {
     this.testLogged();
   }
 
+  ionViewWillEnter() {
+    this.testLogged();
+  }
+
   cerrarSesion(): void {
     this.tokenService.cerrarSesion();
     this.isLogged = false;
@@ -37,7 +41,7 @@ export class MenuComponent implements OnInit {
     var roo = this.roles;
     roo.forEach(ele => {
       var x: string = ele['authority'];
-      console.log(x);
+      //console.log(x);
     });
 
   }

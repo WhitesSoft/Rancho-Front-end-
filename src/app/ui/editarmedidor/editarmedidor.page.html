@@ -1,0 +1,48 @@
+<app-header title="Editar medidor"></app-header>
+
+<ion-content *ngIf="medidor">
+
+  <ion-card>
+
+    <form #f="ngForm" (ngSubmit)="actualizarMedidor()" novalidate>
+      <ion-list lines="full" class="ion-no-margin ion-no-padding">
+
+        <ion-item>
+          <ion-label position="floating">Serial: <ion-text color="danger">*</ion-text>
+          </ion-label>
+          <ion-input required type="text" name="serial" [(ngModel)]="medidor.serial"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Marca: <ion-text color="danger">*</ion-text>
+          </ion-label>
+          <ion-input required type="text" name="marca" [(ngModel)]="medidor.marca"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Registro Inicio: <ion-text color="danger">*</ion-text>
+          </ion-label>
+          <ion-input required type="number" name="registroInicio" [(ngModel)]="medidor.registroInicio"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Fecha de instalacion: <ion-text color="danger">*</ion-text>
+          </ion-label>
+          <ion-input required type="date" name="fechaInstalacion" [(ngModel)]="medidor.fechaInstalacion">
+          </ion-input>
+        </ion-item>
+
+        <div class="ion-padding">
+          <ion-button color="success" expand="block" type="submit" class="ion-no-margin" [disabled]="!f.valid">
+            <ion-icon name="create" slot="icon-only"></ion-icon>
+            Actualizar medidor
+          </ion-button>
+        </div>
+
+      </ion-list>
+    </form>
+
+  </ion-card>
+
+
+</ion-content>

@@ -36,7 +36,7 @@ export class UsuarioService {
   }
 
   //borrar usuario
-  public eliminarUsuario(id: string): Observable<any> {
+  public eliminarUsuario(id: number): Observable<any> {
     return this.httpClient.delete<any>(this.usuarioURL + `eliminar/${id}`);
   }
 }

@@ -22,6 +22,10 @@ export class ListarsociosPage implements OnInit {
     this.cargarLista();
   }
 
+  ionViewWillEnter() {
+    this.cargarLista();
+  }
+
   cargarLista(): void {
     this.socioService.listaSocios().subscribe(
       data => {

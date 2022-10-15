@@ -1,0 +1,30 @@
+<app-header title="Informacion del medidor"></app-header>
+
+<ion-content *ngIf="medidor">
+
+    <ion-card>
+      <ion-icon name="logo-snapchat"></ion-icon>
+        <ion-card-header>
+            <ion-card-title> <strong>Serial: </strong> {{medidor.serial}} </ion-card-title>
+            <ion-card-title> <strong>Marca: </strong> {{medidor.marca}} </ion-card-title>
+            <ion-card-title> <strong>Registro Inicio: </strong> {{medidor.registroInicio}} </ion-card-title>
+            <ion-card-title> <strong>Fecha de instalacion: </strong> {{medidor.fechaInstalacion}} </ion-card-title>
+        </ion-card-header>
+    </ion-card>
+
+
+</ion-content>
+
+<ion-content *ngIf="!medidor">
+
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title> <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text> </ion-card-title>
+            <ion-card-title> <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text> </ion-card-title>
+            <ion-card-title> <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text> </ion-card-title>
+            <ion-card-title> <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text> </ion-card-title>
+            <ion-card-title> <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text> </ion-card-title>
+        </ion-card-header>
+    </ion-card>
+
+</ion-content>

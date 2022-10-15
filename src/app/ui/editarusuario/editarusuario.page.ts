@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-import { RolNombre } from 'src/app/enums/rol-nombre';
-import { Rol } from 'src/app/models/rol';
-import { Socio } from 'src/app/models/socio';
 import { Usuario } from 'src/app/models/usuario';
 import { UsuarioService } from 'src/app/service/usuario.service';
 
@@ -16,10 +12,9 @@ import { UsuarioService } from 'src/app/service/usuario.service';
 export class EditarusuarioPage implements OnInit {
 
   usuario: Usuario;
-  x: Rol;
   roles: string[] = [];
-  rolSelected: string[] = [];
-  rolEnviar: Set<Rol> = new Set();
+  rolesSeleccionados: string[] = [];
+  rolesEnviar: Set<String> = new Set<String>();
 
   constructor(
     private usuarioService: UsuarioService, 
@@ -36,33 +31,28 @@ export class EditarusuarioPage implements OnInit {
       data => {
         this.usuario = data;
 
-        //Obtenemos los roles del usuario
+        //Obtenemos los roles del usuario y cortamos el texto
         var rol = data;
         rol.roles.forEach(item => {
           var x: string = item['rolNombre'];
           this.roles.push(x.substring(5));
         });
-
-        //cargamos los roles
+        
+        //cargamos los roles para mostrarlo en el ion-select
         if(this.roles.indexOf('ADMINISTRADOR') != -1){
-          this.rolSelected.push('ADMINISTRADOR');
-          //this.rolEnviar.add((this.x.setRolNombre(RolNombre.ROLE_ADMINISTRADOR)));
-        }
+          this.rolesSeleccionados.push('ADMINISTRADOR');
+        }  
         if(this.roles.indexOf('USER') != -1){
-          this.rolSelected.push('USER');
-          this.rolEnviar.add('USER');
+          this.rolesSeleccionados.push('USER');
         }
         if(this.roles.indexOf('CAJERO') != -1){
-          this.rolSelected.push('CAJERO');
-          this.rolEnviar.add('CAJERO');
+          this.rolesSeleccionados.push('CAJERO');
         }
         if(this.roles.indexOf('LECTURADOR') != -1){
-          this.rolSelected.push('LECTURADOR');
-          this.rolEnviar.add('LECTURADOR');
+          this.rolesSeleccionados.push('LECTURADOR');
         }
         if(this.roles.indexOf('PLOMERO') != -1){
-          this.rolSelected.push('PLOMERO');
-          this.rolEnviar.add('PLOMERO');
+          this.rolesSeleccionados.push('PLOMERO');
         }
         
       }, 
@@ -75,24 +65,53 @@ export class EditarusuarioPage implements OnInit {
 
 
   actualizarUsuario(): void {
+
     //obtenemos el id
     const id = this.activatedRoute.snapshot.paramMap.get('id');
 
-    console.log(this.usuario);
+    this.rolesEnviar.clear();
 
-    this.usuario.roles = this.rolEnviar;
-    //this.usuario.setRoles(this.rolEnviar);
-    //console.log(this.usuario.setRoles(this.rolSelected));
-    console.log(this.usuario);
-    console.log(this.rolSelected);
+    this.rolesSeleccionados.forEach( item => {
 
-    this.usuarioService.actualizarUsuario(Number(id), this.usuario).subscribe(
+      if(item == 'ADMINISTRADOR'){
+        this.rolesEnviar.add('administrador');
+      }
+
+      if(item == 'USER'){
+        this.rolesEnviar.add('user');
+      }
+
+      if(item == 'CAJERO'){
+        this.rolesEnviar.add('cajero');
+      }
+
+      if(item == 'LECTURADOR'){
+        this.rolesEnviar.add('lecturador');
+      }
+
+      if(item == 'PLOMERO'){
+        this.rolesEnviar.add(('plomero'));
+      }
+       
+    });
+    
+
+    var nuevoRoles: any[] = [];
+
+    //obtenemos los nuevos roles selecionados para enviar
+    this.rolesEnviar.forEach( item => {
+      nuevoRoles.push(item);
+    });
+
+    var nuevoUsuario: Usuario = new Usuario(this.usuario.usuario, this.usuario.password, this.usuario.socio, nuevoRoles);
+
+    this.usuarioService.actualizarUsuario(Number(id), nuevoUsuario).subscribe(
       data => {
         this.presentToast('Usuario actualizado');
         this.router.navigate(['/listarusuarios']);
       }, 
       err => {
-        this.presentToast(err.error.mensaje);
+        this.presentToast(err.error.message);
       }
     );
   }
@@ -108,7 +127,7 @@ export class EditarusuarioPage implements OnInit {
 
   //obtenemos los valores del ion-select
   handleChange(ev) {
-    this.rolSelected = ev.target.value;
+    this.rolesSeleccionados = ev.target.value;
   }
 
 
