@@ -1,0 +1,29 @@
+<app-header title="Informacion del comunicado"></app-header>
+
+<ion-content *ngIf="comunicado">
+
+  <ion-card>
+    <ion-icon name="logo-snapchat"></ion-icon>
+      <ion-card-header>
+          <ion-card-title> <strong>Descripcion: </strong> {{comunicado.descripcion}} </ion-card-title>
+          <ion-card-title> <strong>Fecha de Inicio: </strong> {{comunicado.fechaInicio}} </ion-card-title>
+          <ion-card-title> <strong>Dias Vigentes: </strong> {{comunicado.vigencia}} </ion-card-title>
+      </ion-card-header>
+  </ion-card>
+
+
+</ion-content>
+
+<ion-content *ngIf="!comunicado">
+
+  <ion-card>
+      <ion-card-header>
+          <ion-card-title> <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text> </ion-card-title>
+          <ion-card-title> <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text> </ion-card-title>
+          <ion-card-title> <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text> </ion-card-title>
+          <ion-card-title> <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text> </ion-card-title>
+          <ion-card-title> <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text> </ion-card-title>
+      </ion-card-header>
+  </ion-card>
+
+</ion-content>

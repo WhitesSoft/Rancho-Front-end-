@@ -29,11 +29,47 @@
         </ion-item>
       </ion-menu-toggle>
 
+      <ion-menu-toggle *ngIf="isLogged && isAdmin">
+        <ion-item routerLink="/listarsolicitudes">
+          <ion-icon name="documents-outline" slot="start"></ion-icon>
+          <ion-label>Listar solicitudes</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle *ngIf="isLogged && isAdmin">
+        <ion-item routerLink="/listarcomunicados">
+          <ion-icon name="clipboard-outline" slot="start"></ion-icon>
+          <ion-label>Listar comunicados</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
+      <!-- Crear Comunicados -->
+      <ion-menu-toggle *ngIf="(isLogged && isAdmin) || (isLogged && isCajero) || (isLogged && isPlomero) || (isLogged && isLecturador)">
+        <ion-item routerLink="/crearcomunicado">
+          <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+          <ion-label>Crear Comunicado</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
       <!-- Usuario general -->
-      <ion-menu-toggle *ngIf="isLogged && !isAdmin">
+      <ion-menu-toggle *ngIf="isLogged && isUser">
         <ion-item routerLink="/listarmedidoresuser">
           <ion-icon name="scale-outline" slot="start"></ion-icon>
           <ion-label>Mis medidores</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle *ngIf="isLogged && isUser">
+        <ion-item routerLink="/crearsolicitud">
+          <ion-icon name="document-text-outline" slot="start"></ion-icon>
+          <ion-label>Crear Solicitud</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle *ngIf="isLogged && isUser">
+        <ion-item routerLink="/listarsolicitudesuser">
+          <ion-icon name="folder-open-outline" slot="start"></ion-icon>
+          <ion-label>Mis solicitudes</ion-label>
         </ion-item>
       </ion-menu-toggle>
 

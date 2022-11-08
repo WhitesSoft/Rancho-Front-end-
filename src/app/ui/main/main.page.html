@@ -12,7 +12,7 @@
 <ion-content [fullscreen]="true">
 
     <div id="container" *ngIf="!isLogged">
-        <div class="row mt-5">
+        <!-- <div class="row mt-5">
             <div class="box-login shadow-lg border p-4 rounded">
                 <div class="ion-text-center ion-margin-top ion-padding">
                     <ion-text color="primary">
@@ -24,19 +24,51 @@
                     </ion-button>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 
     <div id="container" *ngIf="isLogged">
-        <div class="row mt-5">
-            <div class="box-login shadow-lg border p-4 rounded">
-                <div class="ion-text-center ion-margin-top ion-padding">
+
+        <ion-card>
+            <ion-card-header>
+                <div class="ion-text-center ion-padding">
                     <ion-text color="primary">
-                        <strong>Bienvenido {{usuario}}</strong>
+                        <strong>“Sistema de Agua Potable Comunidad Rancho Norte”</strong>
+                    </ion-text>
+                    <br>
+                    <br>
+                    <ion-text color="primary">
+                        “Es una organización comunitaria que se rigen por la Ley de Juntas de Vecinos y demás
+                        Organización es Comunitarias, no persiguen fines de lucro, gozan de personalidad jurídica
+                        y sus socios ingresan y participan de forma voluntaria, personal e indelegable.”
+                    </ion-text>
+                </div>
+            </ion-card-header>
+        </ion-card>
+
+        <div class="row mt-1">
+            <div class="box-login shadow border p-1 rounded">
+                <div class="ion-text-center ion-padding">
+                    <ion-text>
+                        Bienvenido {{usuario}}
                     </ion-text>
                 </div>
             </div>
         </div>
+
+        <ion-card>
+            <ion-card-header>
+                <div class="ion-text-center">
+                    <ion-button color="primary" expand="block" (click)="comunicados()" type="submit" class="ion-no-margin">
+                        <ion-icon name="mail-unread-outline" slot="icon-only"></ion-icon>
+                        Comunicados
+                    </ion-button>
+                </div>
+            </ion-card-header>
+        </ion-card>
+
+        
+
     </div>
 
 </ion-content>

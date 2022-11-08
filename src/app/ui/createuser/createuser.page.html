@@ -5,7 +5,7 @@
     <h1>Crea una cuenta</h1>
   </div>
 
-  <form #f="ngForm" (ngSubmit)="crearUsuario()" novalidate>
+  <form #f="ngForm" (ngSubmit)="crearUsuario(Img)" novalidate>
 
     <div class="contenedor">
 
@@ -73,11 +73,20 @@
 
           <div class="box-login shadow-lg border p-5 rounded">
 
-            <div class="row">
-              <div class="col-lg-12 w-100">
-                <h3>* El usuario no podra ser cambiado.</h3>
+            <!-- Subir imagen -->
+            <form [formGroup]="formSprache">
+
+              <div class="form-group">
+                <img [src]="url" id="preview" class="rounded mx-auto d-block" alt="InternetCtrl">
               </div>
-            </div>
+          
+              <div class="file">
+                <p class="texto">Perfil</p>
+                <input type="file" class="enviar" (change)="imagePreview($event)">
+                <input type="text" [value]="urlImage | async" formControlName="imageUrl" #Img>
+              </div>
+
+            </form> 
 
             <div class="row">
               <div class="col-lg-12">

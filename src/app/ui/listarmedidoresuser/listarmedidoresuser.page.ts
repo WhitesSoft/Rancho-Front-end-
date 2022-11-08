@@ -59,16 +59,6 @@ export class ListarmedidoresuserPage implements OnInit {
         
       }
     );
-    
-
-    // this.medidorService.listaMedidoresSocio(2).subscribe(
-    //   data => {
-    //     this.medidores = data;
-    //   }, 
-    //   err => {
-    //     this.presentToast(err.error.message);
-    //   }
-    // );
   }
 
   async presentToast(msj: string) {

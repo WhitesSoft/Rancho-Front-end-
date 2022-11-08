@@ -1,0 +1,31 @@
+<app-header title="Crear solicitud"></app-header>
+
+<ion-content>
+  <ion-card>
+      <form #f="ngForm" (ngSubmit)="crearSolicitud()" novalidate>
+          <ion-list lines="full" class="ion-no-margin ion-no-padding">
+
+              <ion-item>
+                  <ion-label position="floating">Detalle: <ion-text color="danger">*</ion-text>
+                  </ion-label>
+                  <ion-input required type="text" name="detalle" [(ngModel)]="detalle"></ion-input>
+              </ion-item>
+
+              <ion-item>
+                  <ion-label position="floating">Fecha: <ion-text color="danger">*</ion-text>
+                  </ion-label>
+                  <ion-input required type="date" name="fecha" [(ngModel)]="fecha"></ion-input>
+              </ion-item>
+
+              <div class="ion-padding">
+                  <ion-button color="success" expand="block" type="submit" class="ion-no-margin"
+                      [disabled]="!f.valid">
+                      <ion-icon name="create" slot="icon-only"></ion-icon>
+                      Crear solicitud
+                  </ion-button>
+              </div>
+
+          </ion-list>
+      </form>
+  </ion-card>
+</ion-content>

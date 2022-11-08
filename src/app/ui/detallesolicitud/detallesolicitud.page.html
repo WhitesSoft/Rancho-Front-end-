@@ -1,0 +1,30 @@
+<app-header title="Informacion de la solicitud"></app-header>
+
+<ion-content *ngIf="solicitud">
+
+  <ion-card>
+    <ion-icon name="logo-snapchat"></ion-icon>
+      <ion-card-header>
+          <ion-card-title> <strong>Detalle: </strong> {{solicitud.detalle}} </ion-card-title>
+          <ion-card-title> <strong>Fecha: </strong> {{solicitud.fecha}} </ion-card-title>
+          <ion-card-title> <strong>Estado: </strong> {{estado}} </ion-card-title>
+          <ion-card-title> <strong>Socio: </strong> {{nombreSocio}} </ion-card-title>
+      </ion-card-header>
+  </ion-card>
+
+
+</ion-content>
+
+<ion-content *ngIf="!solicitud">
+
+  <ion-card>
+      <ion-card-header>
+          <ion-card-title> <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text> </ion-card-title>
+          <ion-card-title> <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text> </ion-card-title>
+          <ion-card-title> <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text> </ion-card-title>
+          <ion-card-title> <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text> </ion-card-title>
+          <ion-card-title> <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text> </ion-card-title>
+      </ion-card-header>
+  </ion-card>
+
+</ion-content>

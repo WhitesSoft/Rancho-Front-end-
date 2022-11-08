@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "taller-rancho": {
+      "hosting": {
+        "app": [
+          "taller-rancho"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "taller-rancho"
+  }
+}

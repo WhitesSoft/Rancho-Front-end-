@@ -33,4 +33,8 @@ export class MainPage {
     this.router.navigate(['/login']);
   }
 
+  comunicados(): void{
+    this.router.navigate(['/comunicadosglobal']);
+  }
+
 }

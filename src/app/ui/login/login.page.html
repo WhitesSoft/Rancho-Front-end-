@@ -5,6 +5,22 @@
     <h1>Comite de Agua Potable</h1>
   </div>
 
+  <!-- Subir imagen
+  <form [formGroup]="formSprache" (submit)="subir(Img)">
+
+    <div class="form-group">
+      <label class="col-form-label">Preview Imagen</label>
+      <img [src]="url" id="preview" class="rounded mx-auto d-block" alt="...">
+    </div>
+
+    <div class="file">
+      <p class="texto">Subir Imagen</p>
+      <input type="file" class="enviar" (change)="imagePreview($event)">
+      <input type="text" [value]="urlImage | async" formControlName="imageUrl" #Img>
+      <button class="btn btnLogin w-100" type="submit">Subir</button>
+    </div>
+  </form> -->
+
   <div class="contenedor" *ngIf="!isLogged">
     <div class="box-login shadow-lg border p-4 rounded">
 
