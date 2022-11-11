@@ -87,4 +87,5 @@ export class DetallesolicitudPage implements OnInit {
     });
     toast.present();
   }
+  
 }

@@ -1,0 +1,38 @@
+<app-header title="Crear tarifa"></app-header>
+
+<ion-content>
+  <ion-card>
+      <form #f="ngForm" (ngSubmit)="crearTarifa()" novalidate>
+          <ion-list lines="full" class="ion-no-margin ion-no-padding">
+
+              <ion-item>
+                  <ion-label position="floating">Fecha de inicio de la tarifa: <ion-text color="danger">*</ion-text>
+                  </ion-label>
+                  <br>
+                  <ion-input required type="date" name="fechaInicio" [(ngModel)]="fechaInicio"></ion-input>
+              </ion-item>
+
+              <ion-item>
+                  <ion-label position="floating">Consumo Maximo: <ion-text color="danger">*</ion-text>
+                  </ion-label>
+                  <ion-input required type="number" name="consumoMaximo" [(ngModel)]="consumoMaximo"></ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="floating">Costo Unitario: <ion-text color="danger">*</ion-text>
+                </ion-label>
+                <ion-input required type="number" step="0.01" name="costoUnitario" [(ngModel)]="costoUnitario"></ion-input>
+            </ion-item>
+
+              <div class="ion-padding">
+                  <ion-button color="success" expand="block" type="submit" class="ion-no-margin"
+                      [disabled]="!f.valid">
+                      <ion-icon name="create" slot="icon-only"></ion-icon>
+                      Crear Tarifa
+                  </ion-button>
+              </div>
+
+          </ion-list>
+      </form>
+  </ion-card>
+</ion-content>

@@ -6,11 +6,19 @@
 
     <ion-item-sliding>
 
-      <!-- Ver detalles -->
+      
       <ion-item-options side="start">
+
+        <!-- Ver detalles -->
         <ion-item-option routerLink="/detallemedidor/{{medidor.id}}">
           <ion-icon name="eye" slot="icon-only"></ion-icon>
         </ion-item-option>
+
+        <!-- Generar Consumo -->
+        <ion-item-option color="dark" routerLink="/crearconsumo/{{medidor.id}}">
+          <ion-icon name="pricetags-outline" slot="icon-only"></ion-icon>
+        </ion-item-option>
+
       </ion-item-options>
 
       <!-- Datos medidor -->

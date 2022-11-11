@@ -43,6 +43,24 @@
         </ion-item>
       </ion-menu-toggle>
 
+
+      <!-- Tarifas -->
+      <ion-menu-toggle *ngIf="isLogged && isAdmin">
+        <ion-item routerLink="/listartarifas">
+          <ion-icon name="layers-outline" slot="start"></ion-icon>
+          <ion-label>Listar tarifas</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle *ngIf="isLogged && isAdmin">
+        <ion-item routerLink="/creartarifa">
+          <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+          <ion-label>Crear tarifa</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
+    
+
       <!-- Crear Comunicados -->
       <ion-menu-toggle *ngIf="(isLogged && isAdmin) || (isLogged && isCajero) || (isLogged && isPlomero) || (isLogged && isLecturador)">
         <ion-item routerLink="/crearcomunicado">

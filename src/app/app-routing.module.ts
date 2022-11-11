@@ -132,10 +132,37 @@ const routes: Routes = [
     canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR', 'LECTURADOR', 'PLOMERO', 'CAJERO', 'USER'] }
   },
   {
+    path: 'creartarifa',
+    loadChildren: () => import('./ui/creartarifa/creartarifa.module').then( m => m.CreartarifaPageModule), 
+    canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR', 'LECTURADOR', 'CAJERO'] }
+  },
+  {
+    path: 'detalletarifa/:id',
+    loadChildren: () => import('./ui/detalletarifa/detalletarifa.module').then( m => m.DetalletarifaPageModule), 
+    canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR', 'LECTURADOR', 'CAJERO'] }
+  },
+  {
+    path: 'editartarifa/:id',
+    loadChildren: () => import('./ui/editartarifa/editartarifa.module').then( m => m.EditartarifaPageModule), 
+    canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR', 'LECTURADOR', 'CAJERO'] }
+  },
+  {
+    path: 'listartarifas',
+    loadChildren: () => import('./ui/listartarifas/listartarifas.module').then( m => m.ListartarifasPageModule), 
+    canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR', 'LECTURADOR', 'CAJERO'] }
+  },
+  {
+    path: 'crearconsumo/:id',
+    loadChildren: () => import('./ui/crearconsumo/crearconsumo.module').then( m => m.CrearconsumoPageModule), 
+    canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR', 'LECTURADOR', 'CAJERO'] }
+  },
+  {
     path: '**',
     redirectTo: 'login', 
     pathMatch: 'full'
   },
+  
+  
   
 ];
 
