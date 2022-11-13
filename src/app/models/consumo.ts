@@ -1,3 +1,4 @@
+import { Factura } from "./factura";
 import { Medidor } from "./medidor";
 
 export class Consumo {
@@ -6,11 +7,13 @@ export class Consumo {
     fecha: String;
     lectura: Number;
     medidor: Medidor;
+    factura: Factura;
 
-    constructor(fecha: String, lectura: Number, medidor: Medidor){
+    constructor(fecha: String, lectura: Number, medidor: Medidor, factura: Factura){
         this.fecha = fecha;
         this.lectura = lectura;
         this.medidor = medidor;
+        this.factura = factura;
     }
 
 }

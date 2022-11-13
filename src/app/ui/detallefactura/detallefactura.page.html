@@ -1,0 +1,156 @@
+<app-header title="Mi factura"></app-header>
+
+<ion-content *ngIf="factura">
+
+
+    <div
+      id="contenido"
+      style="display: flex; align-items: center; justify-content: center">
+
+      <div id="app" class="col-10">
+
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 25px;">
+          <h2 style="text-align: center">Factura</h2>
+        </div>
+
+        <div class="row my-3">
+          <div class="col-10">
+            <h1>Sistema de Agua Potable Comunidad Rancho Norte</h1>
+            <p>Tarija - Bolivia</p>
+          </div>
+        </div>
+
+        <hr style="border-top: solid 2px #000" />
+
+        <div
+          class="row fact-info mt-3"
+          style="display: flex; align-items: center; justify-content: center">
+
+          <div class="col-3">
+            <h5>Cliente:</h5>
+            <p>{{factura.razonSocial}}</p>
+            <p></p>
+          </div>
+
+          <div class="col-3">
+            <h5>NIT:</h5>
+            <p>{{factura.nit}}</p>
+            <p></p>
+          </div>
+
+
+          <div class="col-3">
+            <h5>N° de factura</h5>
+            <p>{{factura.id}}</p>
+          </div>
+
+          <div class="col-3">
+            <h5>Fecha</h5>
+            <p>{{factura.periodo}}</p>
+          </div>
+        </div>
+
+        <div class="row my-5">
+          <table
+            class="table table-borderless factura"
+            style="table-layout: fixed">
+
+            <thead
+              style="border-top: solid 3px #000; border-bottom: 3px solid #000">
+              <tr style="width: 300px">
+                <th>Cant.</th>
+                <th>Descripcion</th>
+                <th style="text-align: right">Precio Unitario</th>
+                <th style="text-align: right">Importe</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Consumo de agua potable</td>
+                <td style="text-align: right">{{factura.monto}}</td>
+                <td style="text-align: right">{{factura.monto}}</td>
+              </tr>
+            </tbody>
+
+            <tfoot>
+              <tr>
+                <th></th>
+                <th></th>
+                <th style="text-align: right">Total Factura</th>
+                <th style="text-align: right">Bs. {{factura.monto}}</th>
+              </tr>
+            </tfoot>
+
+          </table>
+        </div>
+
+        <div class="cond row" style="border-top: solid 3px #000">
+
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              margin-top: 25px;">
+            <h2 style="text-align: center">Estado: {{estado}}</h2>
+          </div>
+
+          <div class="col-12 mt-3">
+            <h4>Condiciones y formas de pago</h4>
+            <p>El pago se debe realizar en un plazo de 15 dias.</p>
+            <p>
+              Banco Banreserva
+              <br />
+              IBAN: DO XX 0075 XXXX XX XX XXXX XXXX
+              <br />
+              Código SWIFT: BPDODOSXXXX
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="ion-padding">
+      <ion-button color="primary" (click)="imprimir()" expand="block" type="submit" class="ion-no-margin">  
+          <ion-icon name="cloud-download-outline" slot="icon-only"></ion-icon>
+          Descargar Factura
+      </ion-button>
+    </div>
+
+ 
+
+</ion-content>
+
+<ion-content *ngIf="!factura">
+
+  <ion-card>
+      <ion-card-header>
+          <ion-card-title>
+              <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+          </ion-card-title>
+          <ion-card-title>
+              <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+          </ion-card-title>
+          <ion-card-title>
+              <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+          </ion-card-title>
+          <ion-card-title>
+              <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+          </ion-card-title>
+          <ion-card-title>
+              <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+          </ion-card-title>
+      </ion-card-header>
+  </ion-card>
+
+</ion-content>

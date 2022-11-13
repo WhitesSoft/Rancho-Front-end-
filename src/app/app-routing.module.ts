@@ -15,7 +15,8 @@ const routes: Routes = [
   },
   {
     path: 'main',
-    loadChildren: () => import('./ui/main/main.module').then( m => m.MainPageModule)
+    loadChildren: () => import('./ui/main/main.module').then( m => m.MainPageModule), 
+    canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR', 'LECTURADOR', 'PLOMERO', 'CAJERO', 'USER'] }
   },
   {
     path: 'createuser',
@@ -157,10 +158,16 @@ const routes: Routes = [
     canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR', 'LECTURADOR', 'CAJERO'] }
   },
   {
+    path: 'detallefactura/:id',
+    loadChildren: () => import('./ui/detallefactura/detallefactura.module').then( m => m.DetallefacturaPageModule), 
+    canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR', 'LECTURADOR', 'PLOMERO', 'CAJERO', 'USER'] }
+  },
+  {
     path: '**',
     redirectTo: 'login', 
     pathMatch: 'full'
   },
+  
   
   
   

@@ -28,6 +28,7 @@ export class CreateuserPage implements OnInit {
 
   nombres: string = '';
   apellidos: string = '';
+  cedula: string = '';
   correo: string = '';
   direccion: string = '';
   foto: string = '';
@@ -66,7 +67,7 @@ export class CreateuserPage implements OnInit {
     this.foto = img.value;
 
     //Crear socio
-    const socio = new Socio(this.nombres, this.apellidos, 
+    const socio = new Socio(this.nombres, this.apellidos, this.cedula, 
       this.correo, this.fechaNacimiento, this.direccion, this.foto , this.activo);
 
     //crear usuario  
