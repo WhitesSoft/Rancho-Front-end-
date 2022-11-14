@@ -163,10 +163,16 @@ const routes: Routes = [
     canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR', 'LECTURADOR', 'PLOMERO', 'CAJERO', 'USER'] }
   },
   {
+    path: 'crearcobro/:id',
+    loadChildren: () => import('./ui/crearcobro/crearcobro.module').then( m => m.CrearcobroPageModule), 
+    canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR', 'LECTURADOR', 'PLOMERO', 'CAJERO', 'USER'] }
+  },
+  {
     path: '**',
     redirectTo: 'login', 
     pathMatch: 'full'
   },
+  
   
   
   
