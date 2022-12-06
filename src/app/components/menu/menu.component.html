@@ -6,7 +6,6 @@
   </ion-header>
   <ion-content>
     <ion-list>
-
       <!-- Global -->
       <ion-menu-toggle *ngIf="isLogged">
         <ion-item routerLink="/perfil">
@@ -51,7 +50,6 @@
         </ion-item>
       </ion-menu-toggle>
 
-
       <!-- Tarifas -->
       <ion-menu-toggle *ngIf="isLogged && isAdmin">
         <ion-item routerLink="/listartarifas">
@@ -67,10 +65,15 @@
         </ion-item>
       </ion-menu-toggle>
 
-    
-
       <!-- Crear Comunicados -->
-      <ion-menu-toggle *ngIf="(isLogged && isAdmin) || (isLogged && isCajero) || (isLogged && isPlomero) || (isLogged && isLecturador)">
+      <ion-menu-toggle
+        *ngIf="
+          (isLogged && isAdmin) ||
+          (isLogged && isCajero) ||
+          (isLogged && isPlomero) ||
+          (isLogged && isLecturador)
+        "
+      >
         <ion-item routerLink="/crearcomunicado">
           <ion-icon name="add-circle-outline" slot="start"></ion-icon>
           <ion-label>Crear Comunicado</ion-label>
@@ -106,7 +109,6 @@
           <ion-label>Cerrar sesion</ion-label>
         </ion-item>
       </ion-menu-toggle>
-      
     </ion-list>
   </ion-content>
 </ion-menu>
