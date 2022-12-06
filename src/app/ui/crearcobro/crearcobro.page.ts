@@ -69,21 +69,14 @@ export class CrearcobroPage implements OnInit {
       this.factura.monto, false);
      
     var monto = this.factura.monto;
-    
-    console.log(monto);
-    
-    
-    console.log(nuevaFactura);
-      
+
 
     //creamos nuestro cobro
     const cobro = new Cobro(fechaHora, monto, nuevaFactura);
 
     this.cobroSerive.crearCobro(cobro).subscribe(
       data => {
-        //Actualizamos la factura
-        // const facturaActualizada = new Factura(this.factura.razonSocial, this.factura.nit, this.factura.periodo, 
-        //   this.factura.monto, true);
+
         this.factura.estado = true;  
 
         this.facturaService.actualizarFactura(Number(id), this.factura).subscribe();
