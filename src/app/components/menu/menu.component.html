@@ -71,12 +71,18 @@
           (isLogged && isAdmin) ||
           (isLogged && isCajero) ||
           (isLogged && isPlomero) ||
-          (isLogged && isLecturador)
-        "
-      >
+          (isLogged && isLecturador)">
         <ion-item routerLink="/crearcomunicado">
           <ion-icon name="add-circle-outline" slot="start"></ion-icon>
           <ion-label>Crear Comunicado</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
+      <!-- Administrador -->
+      <ion-menu-toggle *ngIf="isLogged && isAdmin">
+        <ion-item routerLink="/asignarmultas">
+          <ion-icon name="skull-outline" slot="start"></ion-icon>
+          <ion-label>Asignar multas</ion-label>
         </ion-item>
       </ion-menu-toggle>
 

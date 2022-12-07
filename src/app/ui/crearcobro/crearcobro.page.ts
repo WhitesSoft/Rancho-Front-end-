@@ -63,22 +63,16 @@ export class CrearcobroPage implements OnInit {
     moment.locale('es');
     var fechaHora = moment(new Date()).format('MMMM Do YYYY, h:mm:ss a');
    
-
-    //factura
-    var nuevaFactura = new Factura(this.factura.razonSocial, this.factura.nit, this.factura.periodo, 
-      this.factura.monto, false);
-     
+   //Obtenemos el monto de la factura a pagar
     var monto = this.factura.monto;
 
-
     //creamos nuestro cobro
-    const cobro = new Cobro(fechaHora, monto, nuevaFactura);
+    const cobro = new Cobro(fechaHora, monto, this.factura);
 
     this.cobroSerive.crearCobro(cobro).subscribe(
       data => {
 
         this.factura.estado = true;  
-
         this.facturaService.actualizarFactura(Number(id), this.factura).subscribe();
         
         this.presentToast('Pago realizado');

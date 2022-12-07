@@ -1,0 +1,33 @@
+<app-header title="Asignar multas"></app-header>
+
+<ion-content>
+
+  <ion-card color="primary">
+    <ion-card-header>
+      <ion-card-title>Facturas no pagadas despues de 30 dias</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list *ngFor="let factura of facturas">
+
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img alt="Silhouette of mountains" src="https://cdn-icons-png.flaticon.com/512/4196/4196427.png" />
+          </ion-thumbnail>
+          <ion-label> 
+            <strong> Socio: </strong> {{factura.nombres}} 
+            <br>
+            <strong> Fecha factura: </strong> {{factura.fechaFacturaVencida}}
+            <br>
+            <strong> Total dias de retraso: </strong> {{factura.diasRetraso}}
+          </ion-label>
+          
+          <ion-button fill="clear" (click)="asignarMulta(factura.idSocio)">Asignar multa</ion-button>
+        </ion-item>
+        
+        <br>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

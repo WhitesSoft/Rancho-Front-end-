@@ -168,14 +168,15 @@ const routes: Routes = [
     canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR', 'LECTURADOR', 'PLOMERO', 'CAJERO', 'USER'] }
   },
   {
+    path: 'asignarmultas',
+    loadChildren: () => import('./ui/asignarmultas/asignarmultas.module').then( m => m.AsignarmultasPageModule),
+    canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR', 'LECTURADOR'] }
+  },
+  {
     path: '**',
     redirectTo: 'login', 
     pathMatch: 'full'
   },
-  
-  
-  
-  
   
 ];
 
