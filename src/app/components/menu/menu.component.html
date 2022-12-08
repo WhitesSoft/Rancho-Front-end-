@@ -1,11 +1,14 @@
 <ion-menu contentId="main" menuId="menu">
+
   <ion-header>
     <ion-toolbar color="tertiary">
       <ion-title>Menu</ion-title>
     </ion-toolbar>
   </ion-header>
+
   <ion-content>
     <ion-list>
+
       <!-- Global -->
       <ion-menu-toggle *ngIf="isLogged">
         <ion-item routerLink="/perfil">
@@ -15,98 +18,168 @@
       </ion-menu-toggle>
 
       <!-- Administrador -->
-      <ion-menu-toggle *ngIf="isLogged && isAdmin">
-        <ion-item routerLink="/listarsocios">
-          <ion-icon name="people-outline" slot="start"></ion-icon>
-          <ion-label>Listar socios</ion-label>
-        </ion-item>
-      </ion-menu-toggle>
+      <ion-accordion-group *ngIf="isLogged && isAdmin">
 
-      <ion-menu-toggle *ngIf="isLogged && isAdmin">
-        <ion-item routerLink="/listarusuarios">
-          <ion-icon name="people-outline" slot="start"></ion-icon>
-          <ion-label>Listar usuarios</ion-label>
-        </ion-item>
-      </ion-menu-toggle>
+        <!-- Crear -->
+        <ion-accordion value="first">
+          <ion-item slot="header">
+            <ion-icon name="add-outline" slot="start"></ion-icon>
+            <ion-label>Crear</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
 
-      <ion-menu-toggle *ngIf="isLogged && isAdmin">
-        <ion-item routerLink="/listarmedidores">
-          <ion-icon name="scale-outline" slot="start"></ion-icon>
-          <ion-label>Listar medidores</ion-label>
-        </ion-item>
-      </ion-menu-toggle>
+            <!-- Crear tarifas -->
+            <ion-menu-toggle *ngIf="isLogged && isAdmin">
+              <ion-item routerLink="/creartarifa">
+                <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+                <ion-label>Crear tarifa</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
 
-      <ion-menu-toggle *ngIf="isLogged && isAdmin">
-        <ion-item routerLink="/listarsolicitudes">
-          <ion-icon name="documents-outline" slot="start"></ion-icon>
-          <ion-label>Listar solicitudes</ion-label>
-        </ion-item>
-      </ion-menu-toggle>
+            <!-- Crear Comunicados -->
+            <ion-menu-toggle
+              *ngIf="
+              (isLogged && isAdmin) ||
+              (isLogged && isCajero) ||
+              (isLogged && isPlomero) ||
+              (isLogged && isLecturador)">
+              <ion-item routerLink="/crearcomunicado">
+                <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+                <ion-label>Crear Comunicado</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
 
-      <ion-menu-toggle *ngIf="isLogged && isAdmin">
-        <ion-item routerLink="/listarcomunicados">
-          <ion-icon name="clipboard-outline" slot="start"></ion-icon>
-          <ion-label>Listar comunicados</ion-label>
-        </ion-item>
-      </ion-menu-toggle>
+            <!-- Crear multas -->
+            <ion-menu-toggle *ngIf="isLogged && isAdmin">
+              <ion-item routerLink="/asignarmultas">
+                <ion-icon name="skull-outline" slot="start"></ion-icon>
+                <ion-label>Asignar multas</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
 
-      <!-- Tarifas -->
-      <ion-menu-toggle *ngIf="isLogged && isAdmin">
-        <ion-item routerLink="/listartarifas">
-          <ion-icon name="layers-outline" slot="start"></ion-icon>
-          <ion-label>Listar tarifas</ion-label>
-        </ion-item>
-      </ion-menu-toggle>
+          </div>
+        </ion-accordion>
 
-      <ion-menu-toggle *ngIf="isLogged && isAdmin">
-        <ion-item routerLink="/creartarifa">
-          <ion-icon name="add-circle-outline" slot="start"></ion-icon>
-          <ion-label>Crear tarifa</ion-label>
-        </ion-item>
-      </ion-menu-toggle>
+        <!-- Listas -->
+        <ion-accordion value="second">
+          <ion-item slot="header">
+            <ion-icon name="list-outline" slot="start"></ion-icon>
+            <ion-label>Listas</ion-label>
+          </ion-item>
 
-      <!-- Crear Comunicados -->
-      <ion-menu-toggle
-        *ngIf="
-          (isLogged && isAdmin) ||
-          (isLogged && isCajero) ||
-          (isLogged && isPlomero) ||
-          (isLogged && isLecturador)">
-        <ion-item routerLink="/crearcomunicado">
-          <ion-icon name="add-circle-outline" slot="start"></ion-icon>
-          <ion-label>Crear Comunicado</ion-label>
-        </ion-item>
-      </ion-menu-toggle>
+          <div class="ion-padding" slot="content">
 
-      <!-- Administrador -->
-      <ion-menu-toggle *ngIf="isLogged && isAdmin">
-        <ion-item routerLink="/asignarmultas">
-          <ion-icon name="skull-outline" slot="start"></ion-icon>
-          <ion-label>Asignar multas</ion-label>
-        </ion-item>
-      </ion-menu-toggle>
+            <!-- Administrador -->
+            <ion-menu-toggle *ngIf="isLogged && isAdmin">
+              <ion-item routerLink="/listarsocios">
+                <ion-icon name="people-outline" slot="start"></ion-icon>
+                <ion-label>Listar socios</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+
+            <ion-menu-toggle *ngIf="isLogged && isAdmin">
+              <ion-item routerLink="/listarusuarios">
+                <ion-icon name="people-outline" slot="start"></ion-icon>
+                <ion-label>Listar usuarios</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+
+            <ion-menu-toggle *ngIf="isLogged && isAdmin">
+              <ion-item routerLink="/listarmedidores">
+                <ion-icon name="scale-outline" slot="start"></ion-icon>
+                <ion-label>Listar medidores</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+
+            <ion-menu-toggle *ngIf="isLogged && isAdmin">
+              <ion-item routerLink="/listarsolicitudes">
+                <ion-icon name="documents-outline" slot="start"></ion-icon>
+                <ion-label>Listar solicitudes</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+
+            <ion-menu-toggle *ngIf="isLogged && isAdmin">
+              <ion-item routerLink="/listarcomunicados">
+                <ion-icon name="clipboard-outline" slot="start"></ion-icon>
+                <ion-label>Listar comunicados</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+
+            <!-- Tarifas -->
+            <ion-menu-toggle *ngIf="isLogged && isAdmin">
+              <ion-item routerLink="/listartarifas">
+                <ion-icon name="layers-outline" slot="start"></ion-icon>
+                <ion-label>Listar tarifas</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+          </div>
+
+        </ion-accordion>
+
+      </ion-accordion-group>
+
 
       <!-- Usuario general -->
-      <ion-menu-toggle *ngIf="isLogged && isUser">
-        <ion-item routerLink="/listarmedidoresuser">
-          <ion-icon name="scale-outline" slot="start"></ion-icon>
-          <ion-label>Mis medidores</ion-label>
-        </ion-item>
-      </ion-menu-toggle>
+      <ion-accordion-group *ngIf="isLogged && isUser">
 
-      <ion-menu-toggle *ngIf="isLogged && isUser">
-        <ion-item routerLink="/crearsolicitud">
-          <ion-icon name="document-text-outline" slot="start"></ion-icon>
-          <ion-label>Crear Solicitud</ion-label>
-        </ion-item>
-      </ion-menu-toggle>
+        <!-- Crear -->
+        <ion-accordion value="first">
+          <ion-item slot="header">
+            <ion-icon name="add-outline" slot="start"></ion-icon>
+            <ion-label>Crear</ion-label>
+          </ion-item>
 
-      <ion-menu-toggle *ngIf="isLogged && isUser">
-        <ion-item routerLink="/listarsolicitudesuser">
-          <ion-icon name="folder-open-outline" slot="start"></ion-icon>
-          <ion-label>Mis solicitudes</ion-label>
-        </ion-item>
-      </ion-menu-toggle>
+          <div class="ion-padding" slot="content">
+            <ion-menu-toggle>
+              <ion-item routerLink="/crearsolicitud">
+                <ion-icon name="document-text-outline" slot="start"></ion-icon>
+                <ion-label>Crear una solicitud</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+      
+            <ion-menu-toggle>
+              <ion-item routerLink="/crearreclamo">
+                <ion-icon name="alert-circle-outline" slot="start"></ion-icon>
+                <ion-label>Crear un reclamo</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+          </div>
+
+        </ion-accordion>
+
+        <!-- Listas -->
+        <ion-accordion value="second">
+          <ion-item slot="header">
+            <ion-icon name="server-outline" slot="start"></ion-icon>
+            <ion-label>Mis servicios</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+
+            <ion-menu-toggle >
+              <ion-item routerLink="/listarmedidoresuser">
+                <ion-icon name="scale-outline" slot="start"></ion-icon>
+                <ion-label>Mis medidores</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+      
+            <ion-menu-toggle>
+              <ion-item routerLink="/listarsolicitudesuser">
+                <ion-icon name="folder-open-outline" slot="start"></ion-icon>
+                <ion-label>Mis solicitudes</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+      
+            <ion-menu-toggle>
+              <ion-item routerLink="/listarmultasuser">
+                <ion-icon name="sad-outline" slot="start"></ion-icon>
+                <ion-label>Mis multas</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+            
+          </div>
+        </ion-accordion>
+
+      </ion-accordion-group>
 
       <!-- Global -->
       <ion-menu-toggle *ngIf="isLogged">
@@ -115,6 +188,7 @@
           <ion-label>Cerrar sesion</ion-label>
         </ion-item>
       </ion-menu-toggle>
+
     </ion-list>
   </ion-content>
 </ion-menu>

@@ -72,6 +72,7 @@ export class ListarusuariosPage implements OnInit {
     });
 
     await alert.present();
+    
   }
 
   async presentToast(msj: string) {

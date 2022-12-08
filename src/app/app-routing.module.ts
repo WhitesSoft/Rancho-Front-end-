@@ -173,10 +173,38 @@ const routes: Routes = [
     canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR', 'LECTURADOR'] }
   },
   {
+    path: 'listarmultasuser',
+    loadChildren: () => import('./ui/listarmultasuser/listarmultasuser.module').then( m => m.ListarmultasuserPageModule),
+    canActivate: [guard], data: { requiredRoles: ['USER'] }
+  },
+  {
+    path: 'crearreclamo',
+    loadChildren: () => import('./ui/crearreclamo/crearreclamo.module').then( m => m.CrearreclamoPageModule), 
+    canActivate: [guard], data: { requiredRoles: ['LECTURADOR', 'PLOMERO', 'CAJERO', 'USER'] }
+  },
+  {
+    path: 'detallereclamo/:id',
+    loadChildren: () => import('./ui/detallereclamo/detallereclamo.module').then( m => m.DetallereclamoPageModule), 
+    canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR', 'LECTURADOR', 'PLOMERO', 'CAJERO', 'USER'] }
+  },
+  {
+    path: 'listarreclamos',
+    loadChildren: () => import('./ui/listarreclamos/listarreclamos.module').then( m => m.ListarreclamosPageModule), 
+    canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR', 'LECTURADOR', 'PLOMERO', 'CAJERO'] }
+  },
+  {
+    path: 'listarreclamosuser',
+    loadChildren: () => import('./ui/listarreclamosuser/listarreclamosuser.module').then( m => m.ListarreclamosuserPageModule), 
+    canActivate: [guard], data: { requiredRoles: ['USER'] }
+  },
+  
+  {
     path: '**',
     redirectTo: 'login', 
     pathMatch: 'full'
   },
+  
+  
   
 ];
 

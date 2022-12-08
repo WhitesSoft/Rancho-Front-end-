@@ -25,33 +25,22 @@ export class PerfilPage implements OnInit {
 
   cargarPerfil(): void {
 
-    
     var usuario = this.tokenService.getUsuario();
-    //console.log(this.usuario);
 
     this.usuarioService.listaUsuarios().subscribe(
       data => {
-        //console.log(data);
+
         data.forEach( ele => {
-          //console.log(ele);
+
           if(ele.usuario == usuario){
             this.usuario = ele;
            
-            
-
             //Obtenemos roles
             var roles = ele['roles'];
             roles.forEach(item => {
               var x: string = item['rolNombre'];
               this.roles.push(x.substring(5));
             });
-
-            console.log(ele.socio.apellidos);
-            
-            // for(let p of roles){
-            //   console.log(p);
-              
-            // }
 
           }
           
@@ -60,9 +49,6 @@ export class PerfilPage implements OnInit {
       }
     );
       
-    
-    
-
   }
 
 }

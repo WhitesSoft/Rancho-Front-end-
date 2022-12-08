@@ -6,7 +6,9 @@
         <ion-card-header>
 
             <ion-card-title> <strong>Información del socio: </strong> </ion-card-title>
-            <img src="{{usuario.socio.foto}}" alt="Girl in a jacket" width="50" height="50" style="margin-top: 10px;">
+            <div class="img-container">
+                <img alt="Silhouette of mountains" src="{{usuario.socio.foto}}" width="100" height="100" />
+            </div>
             <ion-card-subtitle> <strong>Nombres: </strong> {{usuario.socio.nombres}} </ion-card-subtitle>
             <ion-card-subtitle> <strong>Apellidos: </strong> {{usuario.socio.apellidos}} </ion-card-subtitle>
             <ion-card-subtitle> <strong>Carnet de identidad: </strong> {{usuario.socio.cedula}} </ion-card-subtitle>
@@ -40,6 +42,9 @@
 <ion-content *ngIf="!usuario">
 
     <ion-card>
+        <div class="img-container">
+            <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" width="100" height="100" />
+        </div>
         <ion-card-header>
             <ion-card-title>
                 <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>

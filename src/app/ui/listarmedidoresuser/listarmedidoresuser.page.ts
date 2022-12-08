@@ -17,7 +17,6 @@ export class ListarmedidoresuserPage implements OnInit {
   medidores: Medidor[] = [];
 
   constructor(
-    private socioService: SocioService,
     private usuarioService: UsuarioService,
     private tokenService: TokenService,
     private medidorService: MedidorService,
@@ -25,10 +24,6 @@ export class ListarmedidoresuserPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.cargarLista();
-  }
-
-  ionViewWillEnter() {
     this.cargarLista();
   }
 

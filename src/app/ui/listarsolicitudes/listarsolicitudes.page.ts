@@ -11,6 +11,7 @@ import { SolicitudService } from 'src/app/service/solicitud.service';
 export class ListarsolicitudesPage implements OnInit {
 
   solicitudes: Solicitud[] = [];
+  socio = '';
 
   constructor(
     private solicitudService: SolicitudService, 
@@ -21,12 +22,9 @@ export class ListarsolicitudesPage implements OnInit {
   ngOnInit() {
     this.cargarLista();
   }
-  
-  ionViewWillEnter() {
-    this.cargarLista();
-  }
 
   cargarLista(): void {
+
     this.solicitudService.listaSolicitudes().subscribe(
       data => {
         this.solicitudes = data;
@@ -35,6 +33,7 @@ export class ListarsolicitudesPage implements OnInit {
         this.presentToast(err.error.mensaje);
       }
     );
+
   }
 
   eliminarSolicitud(id: number): void {

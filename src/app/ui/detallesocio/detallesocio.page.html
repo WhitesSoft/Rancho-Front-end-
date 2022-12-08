@@ -3,7 +3,9 @@
 <ion-content *ngIf="socio">
 
     <ion-card>
-        <img alt="Silhouette of mountains" src="{{socio.foto}}" />
+        <div class="img-container">
+            <img alt="Silhouette of mountains" src="{{socio.foto}}" width="100" height="100" />
+        </div>
         <ion-card-header>
             <ion-card-title> <strong>Nombres: </strong> {{socio.nombres}} </ion-card-title>
             <ion-card-title> <strong>Apellidos: </strong> {{socio.apellidos}} </ion-card-title>
@@ -37,7 +39,9 @@
 <ion-content *ngIf="!socio">
 
     <ion-card>
-        <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+        <div class="img-container">
+            <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" width="100" height="100" />
+        </div>
         <ion-card-header>
             <ion-card-title> <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text> </ion-card-title>
             <ion-card-title> <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text> </ion-card-title>
