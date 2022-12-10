@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-import { Solicitud } from 'src/app/models/solicitud';
-import { SolicitudService } from 'src/app/service/solicitud.service';
+import { Reclamo } from 'src/app/models/reclamo';
+import ReclamoService from 'src/app/service/reclamo.service';
 
 @Component({
-  selector: 'app-editarsolicitud',
-  templateUrl: './editarsolicitud.page.html',
-  styleUrls: ['./editarsolicitud.page.scss'],
+  selector: 'app-editarreclamo',
+  templateUrl: './editarreclamo.page.html',
+  styleUrls: ['./editarreclamo.page.scss'],
 })
-export class EditarsolicitudPage implements OnInit {
+export class EditarreclamoPage implements OnInit {
 
-  solicitud: Solicitud;
+  reclamo: Reclamo;
 
   constructor(
-    private solicitudService: SolicitudService, 
+    private reclamoService: ReclamoService, 
     private activatedRoute: ActivatedRoute, 
     private toastController: ToastController, 
     private router: Router
@@ -24,25 +24,22 @@ export class EditarsolicitudPage implements OnInit {
 
     //obtenemos el id
     const id = this.activatedRoute.snapshot.paramMap.get('id');
-    this.solicitudService.detallesSolicitud(Number(id)).subscribe(
+    this.reclamoService.detallesReclamo(Number(id)).subscribe(
       data => {
-        this.solicitud = data;
-      }, 
-      err => {
-       
+        this.reclamo = data;
       }
     );
 
   }
 
-  actualizarSolicitud(): void {
+  actualizarReclamo(): void {
     //obtenemos el id
     const id = this.activatedRoute.snapshot.paramMap.get('id');
 
-    this.solicitud.fecha = new Date().toISOString().split('T')[0];
-    this.solicitudService.actualizarSolicitud(Number(id), this.solicitud).subscribe(
+    this.reclamo.fecha = new Date().toISOString().split('T')[0];
+    this.reclamoService.actualizarReclamo(Number(id), this.reclamo).subscribe(
       data => {
-        this.presentToast('Solicitud actualizada');
+        this.presentToast('Reclamo actualizado');
         this.router.navigate(['/main']);
       }, 
       err => {

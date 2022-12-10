@@ -16,7 +16,6 @@ export class ListarsolicitudesuserPage implements OnInit {
   solicitudes: Solicitud[] = [];
 
   constructor(
-    private socioService: SocioService,
     private usuarioService: UsuarioService,
     private tokenService: TokenService,
     private solicitudService: SolicitudService,
@@ -46,7 +45,7 @@ export class ListarsolicitudesuserPage implements OnInit {
           if(user == item['usuario']){
             var id = item['id'];
 
-            //Listamos los medidores del socio
+            //Listamos las solicitudes del socio
             this.solicitudService.listaSolicitudesSocio(+id).subscribe(
               data => {
                 this.solicitudes = data;

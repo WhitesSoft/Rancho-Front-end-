@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ListarreclamosPageRoutingModule } from './listarreclamos-routing.module';
+import { EditarreclamoPageRoutingModule } from './editarreclamo-routing.module';
 
-import { ListarreclamosPage } from './listarreclamos.page';
+import { EditarreclamoPage } from './editarreclamo.page';
 import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
@@ -14,9 +14,9 @@ import { ComponentsModule } from 'src/app/components/components.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    ListarreclamosPageRoutingModule,
+    EditarreclamoPageRoutingModule,
     ComponentsModule
   ],
-  declarations: [ListarreclamosPage]
+  declarations: [EditarreclamoPage]
 })
-export class ListarreclamosPageModule {}
+export class EditarreclamoPageModule {}

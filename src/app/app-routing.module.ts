@@ -14,6 +14,10 @@ const routes: Routes = [
     loadChildren: () => import('./ui/login/login.module').then( m => m.LoginPageModule)
   },
   {
+    path: 'invitado',
+    loadChildren: () => import('./ui/invitado/invitado.module').then( m => m.InvitadoPageModule)
+  },
+  {
     path: 'main',
     loadChildren: () => import('./ui/main/main.module').then( m => m.MainPageModule), 
     canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR', 'LECTURADOR', 'PLOMERO', 'CAJERO', 'USER'] }
@@ -21,6 +25,11 @@ const routes: Routes = [
   {
     path: 'createuser',
     loadChildren: () => import('./ui/createuser/createuser.module').then( m => m.CreateuserPageModule)
+  },
+  {
+    path: 'cambiarpassword/:id',
+    loadChildren: () => import('./ui/cambiarpassword/cambiarpassword.module').then( m => m.CambiarpasswordPageModule), 
+    canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR', 'LECTURADOR', 'PLOMERO', 'CAJERO', 'USER'] }
   },
   {
     path: 'listarsocios',
@@ -188,6 +197,11 @@ const routes: Routes = [
     canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR', 'LECTURADOR', 'PLOMERO', 'CAJERO', 'USER'] }
   },
   {
+    path: 'editarreclamo/:id',
+    loadChildren: () => import('./ui/editarreclamo/editarreclamo.module').then( m => m.EditarreclamoPageModule),
+    canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR', 'LECTURADOR', 'PLOMERO', 'CAJERO', 'USER'] }
+  },
+  {
     path: 'listarreclamos',
     loadChildren: () => import('./ui/listarreclamos/listarreclamos.module').then( m => m.ListarreclamosPageModule), 
     canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR', 'LECTURADOR', 'PLOMERO', 'CAJERO'] }
@@ -196,15 +210,12 @@ const routes: Routes = [
     path: 'listarreclamosuser',
     loadChildren: () => import('./ui/listarreclamosuser/listarreclamosuser.module').then( m => m.ListarreclamosuserPageModule), 
     canActivate: [guard], data: { requiredRoles: ['USER'] }
-  },
-  
+  }, 
   {
     path: '**',
     redirectTo: 'login', 
     pathMatch: 'full'
   },
-  
-  
   
 ];
 

@@ -99,6 +99,13 @@
             </ion-menu-toggle>
 
             <ion-menu-toggle *ngIf="isLogged && isAdmin">
+              <ion-item routerLink="/listarreclamos">
+                <ion-icon name="alert-circle-outline" slot="start"></ion-icon>
+                <ion-label>Listar reclamos</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+
+            <ion-menu-toggle *ngIf="isLogged && isAdmin">
               <ion-item routerLink="/listarcomunicados">
                 <ion-icon name="clipboard-outline" slot="start"></ion-icon>
                 <ion-label>Listar comunicados</ion-label>
@@ -166,6 +173,13 @@
               <ion-item routerLink="/listarsolicitudesuser">
                 <ion-icon name="folder-open-outline" slot="start"></ion-icon>
                 <ion-label>Mis solicitudes</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+
+            <ion-menu-toggle>
+              <ion-item routerLink="/listarreclamosuser">
+                <ion-icon name="alert-circle-outline" slot="start"></ion-icon>
+                <ion-label>Mis reclamos</ion-label>
               </ion-item>
             </ion-menu-toggle>
       

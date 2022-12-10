@@ -10,7 +10,7 @@
             <ion-card-title> <strong>Nombres: </strong> {{socio.nombres}} </ion-card-title>
             <ion-card-title> <strong>Apellidos: </strong> {{socio.apellidos}} </ion-card-title>
             <ion-card-title> <strong>Correo: </strong> {{socio.correo}} </ion-card-title>
-            <ion-card-title> <strong>Fecha de nacimiento: </strong> {{socio.fechaNacimiento}} </ion-card-title>
+            <ion-card-title> <strong>Fecha de nacimiento: </strong> {{socio.fechaNacimiento.substr(-24, 10)}} </ion-card-title>
             <ion-card-title> <strong>Direccion: </strong> {{socio.direccion}} </ion-card-title>
             <ion-card-title> <strong>Cantidad de medidores: </strong> {{totalMedidores}} </ion-card-title>
         </ion-card-header>

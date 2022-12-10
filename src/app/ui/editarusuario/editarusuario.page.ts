@@ -103,9 +103,10 @@ export class EditarusuarioPage implements OnInit {
       nuevoRoles.push(item);
     });
 
-    var nuevoUsuario: Usuario = new Usuario(this.usuario.usuario, this.usuario.password, this.usuario.socio, nuevoRoles);
+    //Actualizamos los roles
+    this.usuario.roles = nuevoRoles;
 
-    this.usuarioService.actualizarUsuario(Number(id), nuevoUsuario).subscribe(
+    this.usuarioService.actualizarUsuario(Number(id), this.usuario).subscribe(
       data => {
         this.presentToast('Usuario actualizado');
         this.router.navigate(['/listarusuarios']);
@@ -114,6 +115,7 @@ export class EditarusuarioPage implements OnInit {
         this.presentToast(err.error.message);
       }
     );
+    
   }
 
   async presentToast(msj: string) {

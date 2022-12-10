@@ -71,7 +71,7 @@ export class CreateuserPage implements OnInit {
       this.correo, this.fechaNacimiento, this.direccion, this.foto , this.activo);
 
     //crear usuario  
-    this.nuevoUsuario = new NuevoUsuario(this.usuario, this.password, socio);
+    this.nuevoUsuario = new NuevoUsuario(this.usuario, this.password, false, socio);
 
     this.authService.crear(this.nuevoUsuario).subscribe(
       data => {
@@ -98,7 +98,7 @@ export class CreateuserPage implements OnInit {
     reader.onload = (event: any) => {
       this.url = event.target.result;
       const file = e.target.files[0];
-      const filepath = 'juan/' + 'siu' ; //+ this.formSprache.value.language; //nombre a la imagen
+      const filepath = this.usuario + '1' ; //+ this.formSprache.value.language; //nombre a la imagen
       const ref = this.storage.ref(filepath);
       const task = this.storage.upload(filepath, file);
       task.snapshotChanges().pipe(finalize(() => this.urlImage = ref.getDownloadURL())).subscribe();

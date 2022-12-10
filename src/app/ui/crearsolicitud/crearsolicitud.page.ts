@@ -41,7 +41,8 @@ export class CrearsolicitudPage implements OnInit {
 
 
   crearSolicitud(): void {
-    //Creamos nuestro comunicado
+    //Creamos nuestro solicitud
+    this.fecha = new Date().toISOString().split('T')[0];
     this.solicitud = new Solicitud(this.detalle, this.fecha, this.atendido, this.socio);
 
     this.solicitudService.crearSolicitud(Number(this.id), this.solicitud).subscribe(

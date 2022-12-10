@@ -9,12 +9,12 @@
           <ion-card-title> <strong>Estado: </strong> {{estado}} </ion-card-title>
           <ion-card-title> <strong>Socio: </strong> {{nombreSocio}} </ion-card-title>
       </ion-card-header>
-      <div class="ion-padding">
+      <div class="ion-padding" *ngIf="!isUser">
         <ion-button color="success" (click)="atender(solicitud.id)" *ngIf="!estadoSolicitud" expand="block" type="submit" class="ion-no-margin">
           <ion-icon name="checkmark-done-outline"></ion-icon>
             Atender solicitud
         </ion-button>
-    </div>
+      </div>
   </ion-card>
 
 

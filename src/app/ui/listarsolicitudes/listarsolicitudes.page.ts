@@ -11,7 +11,6 @@ import { SolicitudService } from 'src/app/service/solicitud.service';
 export class ListarsolicitudesPage implements OnInit {
 
   solicitudes: Solicitud[] = [];
-  socio = '';
 
   constructor(
     private solicitudService: SolicitudService, 

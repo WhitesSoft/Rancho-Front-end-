@@ -4,6 +4,7 @@ import { AlertController, ToastController } from '@ionic/angular';
 import { Solicitud } from 'src/app/models/solicitud';
 import { SocioService } from 'src/app/service/socio.service';
 import { SolicitudService } from 'src/app/service/solicitud.service';
+import { TokenService } from 'src/app/service/token.service';
 
 @Component({
   selector: 'app-detallesolicitud',
@@ -16,6 +17,7 @@ export class DetallesolicitudPage implements OnInit {
   estado = '';
   estadoSolicitud: boolean;
   nombreSocio = '';
+  isUser: boolean;
 
   constructor(
     private solicitudService: SolicitudService,
@@ -23,6 +25,7 @@ export class DetallesolicitudPage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private toastController: ToastController,
     private alertController: AlertController,
+    private tokenService: TokenService,
     private router: Router
   ) { }
 
@@ -31,6 +34,14 @@ export class DetallesolicitudPage implements OnInit {
   }
 
   cargarInformacion(): void {
+
+    //vemos el rol del usuario
+    var rol = this.tokenService.getAuthorities();
+    rol.forEach(ele =>{
+      var x: string = ele['authority'];
+      if (x.substring(5) == 'USER')
+        this.isUser = true;
+    });
 
     //accedemos al id que aparece en el url
     const id = this.activatedRoute.snapshot.paramMap.get('id');
