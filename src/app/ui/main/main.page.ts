@@ -63,11 +63,6 @@ export class MainPage implements OnInit {
     );
   }
 
-  cambiarPassword(): void{
-    console.log(this.id);
-    
-  }
-
   iniciarSesion(): void {
     this.router.navigate(['/login']);
   }

@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
+import { Socio } from 'src/app/models/socio';
 import { Usuario } from 'src/app/models/usuario';
 import { AuthService } from 'src/app/service/auth.service';
+import { SocioService } from 'src/app/service/socio.service';
+import { TokenService } from 'src/app/service/token.service';
 import { UsuarioService } from 'src/app/service/usuario.service';
 
 @Component({
@@ -13,11 +16,14 @@ import { UsuarioService } from 'src/app/service/usuario.service';
 export class CambiarpasswordPage implements OnInit {
 
   usuario: Usuario;
+  socio: Socio;
+  roles: any[] = [];
   password = '';
   estadoPassword = true;
 
   constructor(
     private usuarioService: UsuarioService,
+    private tokenService: TokenService,
     private activatedRoute: ActivatedRoute,
     private toastController: ToastController,
     private alertController: AlertController,
@@ -25,123 +31,45 @@ export class CambiarpasswordPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    //setTimeout(() => this.cargarInformacion(), 2000);
-
-    //accedemos al id que aparece en el url
-    const id = this.activatedRoute.snapshot.paramMap.get('id');
-
-    this.usuarioService.detallesUsuario(Number(id)).subscribe(
-      data => {
-        this.usuario = data;
-      },
-      err => {
-        this.presentToast('No se pudo cargar la información');
-      }
-    );
-
+    setTimeout(() => this.cargarInformacion(), 2000);
   }
 
-  actualizarUsuario(): void {
+  async actualizarUsuario() {
 
     //accedemos al id que aparece en el url
     const id = this.activatedRoute.snapshot.paramMap.get('id');
-   
 
-    
-    
-    console.log(this.usuario);
-    
+    const alert = await this.alertController.create({
+      header: 'Confirmar',
+      message: '¿Seguro que deseas cambiar la contraseña?',
+      buttons: [
+        {
+          text: 'Aceptar',
+          handler: () => {
 
-    console.log("Modificado");
-    
-    
-    
+            //Actualizamos 
+            var usuarioActualizado: Usuario = new Usuario(this.usuario.usuario, this.password, true, this.usuario.socio, this.roles);
+            this.usuarioService.actualizarUsuarioPassword(Number(id), usuarioActualizado).subscribe(
+              data => {
+                this.presentToast("Contraseña actualizada");
+                this.router.navigate(['/main']);
+              }
+            );
 
+          }
+        },
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }
+      ]
+    });
 
-    //Actualizamos el password
-    this.usuario.password = this.password;
-    this.usuario.estadoPassword = this.estadoPassword;
-    console.log(this.usuario);
-
-    var nuevo = this.usuario;
-   
-    this.usuarioService.eliminarUsuario(Number(id)).subscribe(
-      data => {
-        console.log("posi elimnar");
-
-        
-      }
-    );
-
-    
-
-    //console.log(this.usuario.roles);
-
-   
-
-
-    // var nuevoUsuario: Usuario = new Usuario(this.usuario.usuario, this.usuario.password, this.usuario.estadoPassword, this.usuario.socio, this.usuario.roles);
-    // //console.log(nuevoUsuario);
-
-    // this.usuarioService.actualizarUsuarioPassword(Number(id), this.usuario).subscribe(
-    //   data => {
-    //     console.log(data);
-
-    //     this.presentToast("Password actualizado correctamente.")
-    //     this.router.navigate(['/main']);
-    //   },
-    //   err => {
-    //     console.log(err);
-    //     this.presentToast(err.error.message);
-    //   }
-    // );
-
-
-    // const alert = await this.alertController.create({
-    //   header: 'Confirmar',
-    //   message: '¿Seguro que deseas cambiar la contraseña?',
-    //   buttons: [
-    //     {
-    //       text: 'Aceptar',
-    //       handler: () => {
-
-    //         //Actualizamos el password
-    //         this.usuario.password = this.newPassword;
-    //         this.usuario.estadoPassword = true;
-
-    //         console.log(this.usuario);
-
-
-    //         var nuevoUsuario: Usuario = new Usuario(this.usuario.usuario, this.usuario.password, this.usuario.estadoPassword, this.usuario.socio, this.usuario.roles);
-    //         //console.log(nuevoUsuario);
-
-    //         this.usuarioService.actualizarUsuarioPassword(Number(id), this.usuario).subscribe(
-    //           data => {
-    //             console.log(data);
-
-    //             this.presentToast("Password actualizado correctamente.")
-    //             this.router.navigate(['/main']);
-    //           }, 
-    //           err => {
-    //             console.log(err);
-    //             this.presentToast(err.error.message);
-    //           }
-    //         );
-
-    //       }
-    //     },
-    //     {
-    //       text: 'Cancelar',
-    //       role: 'cancel',
-    //       cssClass: 'secondary',
-    //       handler: (blah) => {
-    //         console.log('Confirm Cancel: blah');
-    //       }
-    //     }
-    //   ]
-    // });
-
-    // await alert.present();
+    await alert.present();
 
   }
 
@@ -150,15 +78,22 @@ export class CambiarpasswordPage implements OnInit {
     //accedemos al id que aparece en el url
     const id = this.activatedRoute.snapshot.paramMap.get('id');
 
+    //Obtenemos usuario
     this.usuarioService.detallesUsuario(Number(id)).subscribe(
       data => {
         this.usuario = data;
-        //console.log(this.usuario);
       },
       err => {
         this.presentToast('No se pudo cargar la información');
       }
     );
+
+    //Obtenemos roles
+    var roleees = this.tokenService.getAuthorities();
+    roleees.forEach(rol => {
+      var x: string = rol['authority'];
+      this.roles.push(x.substring(5).toLowerCase());
+    });
 
   }
 
