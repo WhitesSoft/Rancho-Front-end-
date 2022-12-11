@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
 import { Comunicado } from 'src/app/models/comunicado';
 import { ComunicadoService } from 'src/app/service/comunicado.service';
+import { ReportesService } from 'src/app/service/reportes.service';
 
 @Component({
   selector: 'app-listarcomunicados',
@@ -11,11 +12,13 @@ import { ComunicadoService } from 'src/app/service/comunicado.service';
 export class ListarcomunicadosPage implements OnInit {
 
   comunicados: Comunicado[] = [];
+  estado: boolean;
 
   constructor(
     private comunicadoService: ComunicadoService, 
     private toastController: ToastController, 
-    private alertController: AlertController
+    private alertController: AlertController,
+    private reportesService: ReportesService
   ) { }
 
   ngOnInit() {
@@ -30,11 +33,25 @@ export class ListarcomunicadosPage implements OnInit {
     this.comunicadoService.listaComunicados().subscribe(
       data => {
         this.comunicados = data;
+        if(this.comunicados.length != 0){
+          this.estado = true;
+        }
       }, 
       err => {
         this.presentToast(err.error.message);
       }
     );
+  }
+
+  imprimir(): void {
+    const encabezado = ["Descripcion", "Fecha de inicio", "Vigencia (dias)"];
+
+    var cuerpo: any[] = [];
+    for(let x of this.comunicados){
+      cuerpo.push([x.descripcion, x.fechaInicio, x.vigencia]);
+    }
+
+    this.reportesService.imprimir(encabezado, cuerpo, "Listado de comunicados", true);
   }
 
   eliminarComunicado(id: number): void {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
 import { Solicitud } from 'src/app/models/solicitud';
+import { ReportesService } from 'src/app/service/reportes.service';
 import { SolicitudService } from 'src/app/service/solicitud.service';
 
 @Component({
@@ -11,11 +12,13 @@ import { SolicitudService } from 'src/app/service/solicitud.service';
 export class ListarsolicitudesPage implements OnInit {
 
   solicitudes: Solicitud[] = [];
+  estado: boolean;
 
   constructor(
     private solicitudService: SolicitudService, 
     private toastController: ToastController, 
-    private alertController: AlertController
+    private alertController: AlertController,
+    private reportesService: ReportesService
   ) { }
 
   ngOnInit() {
@@ -27,12 +30,26 @@ export class ListarsolicitudesPage implements OnInit {
     this.solicitudService.listaSolicitudes().subscribe(
       data => {
         this.solicitudes = data;
+        if(this.solicitudes.length != 0){
+          this.estado = true;
+        }
       }, 
       err => {
         this.presentToast(err.error.mensaje);
       }
     );
 
+  }
+
+  imprimir(): void {
+    const encabezado = ["Detalle solicitud", "Fecha"];
+
+    var cuerpo: any[] = [];
+    for(let x of this.solicitudes){
+      cuerpo.push([x.detalle, x.fecha]);
+    }
+
+    this.reportesService.imprimir(encabezado, cuerpo, "Listado de solicitudes", true);
   }
 
   eliminarSolicitud(id: number): void {

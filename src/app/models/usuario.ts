@@ -8,7 +8,6 @@ export class Usuario {
     estadoPassword: boolean;
     socio: Socio;
     roles: any[];
-    mensaje: string;
 
     constructor(usuario: string, password: string, estadoPassword: boolean, socio: Socio, roles: any[]) {
         this.usuario = usuario;

@@ -119,6 +119,31 @@
                 <ion-label>Listar tarifas</ion-label>
               </ion-item>
             </ion-menu-toggle>
+
+            <!-- Cobros -->
+            <ion-menu-toggle *ngIf="isLogged && isAdmin">
+              <ion-item routerLink="/listarcobros">
+                <ion-icon name="cash-outline" slot="start"></ion-icon>
+                <ion-label>Listar cobros</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+
+            <!-- Facturas -->
+            <ion-menu-toggle *ngIf="isLogged && isAdmin">
+              <ion-item routerLink="/listarfacturas">
+                <ion-icon name="book-outline" slot="start"></ion-icon>
+                <ion-label>Listar facturas</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+
+            <!-- Multas -->
+            <ion-menu-toggle *ngIf="isLogged && isAdmin">
+              <ion-item routerLink="/listarmultas">
+                <ion-icon name="skull-outline" slot="start"></ion-icon>
+                <ion-label>Listar multas</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+
           </div>
 
         </ion-accordion>

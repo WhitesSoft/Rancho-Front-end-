@@ -40,7 +40,6 @@ export class MainPage implements OnInit {
 
   testLogged(): void {
     this.isLogged = this.tokenService.getToken() != null;
-    this.usuario = this.tokenService.getUsuario();
   }
 
   verificarPassword(): void {
@@ -55,6 +54,7 @@ export class MainPage implements OnInit {
           if(ele.usuario == usuario){
             this.estadoPassword = ele.estadoPassword;
             this.id = ele.id;
+            this.usuario = ele.socio.nombres;
           }
 
         });

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
 import { Medidor } from 'src/app/models/medidor';
 import { MedidorService } from 'src/app/service/medidor.service';
+import { ReportesService } from 'src/app/service/reportes.service';
 
 @Component({
   selector: 'app-listarmedidores',
@@ -11,11 +12,13 @@ import { MedidorService } from 'src/app/service/medidor.service';
 export class ListarmedidoresPage implements OnInit {
 
   medidores: Medidor[] = [];
+  estado: boolean;
 
   constructor(
     private medidorService: MedidorService, 
     private toastController: ToastController, 
-    private alertController: AlertController
+    private alertController: AlertController,
+    private reportesService: ReportesService
   ) { }
 
   ngOnInit() {
@@ -30,11 +33,25 @@ export class ListarmedidoresPage implements OnInit {
     this.medidorService.listaMedidores().subscribe(
       data => {
         this.medidores = data;
+        if(this.medidores.length != 0){
+          this.estado = true;
+        }
       }, 
       err => {
         this.presentToast(err.error.message);
       }
     );
+  }
+
+  imprimir(): void {
+    const encabezado = ["Marca", "Serial", "Fecha de instalación"];
+
+    var cuerpo: any[] = [];
+    for(let x of this.medidores){
+      cuerpo.push([x.marca, x.serial, x.fechaInstalacion]);
+    }
+
+    this.reportesService.imprimir(encabezado, cuerpo, "Listado de medidores", true);
   }
 
   eliminarMedidor(id: number): void {

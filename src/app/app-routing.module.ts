@@ -212,10 +212,28 @@ const routes: Routes = [
     canActivate: [guard], data: { requiredRoles: ['USER'] }
   }, 
   {
+    path: 'listarfacturas',
+    loadChildren: () => import('./ui/listarfacturas/listarfacturas.module').then( m => m.ListarfacturasPageModule), 
+    canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR'] }
+  },
+  {
+    path: 'listarcobros',
+    loadChildren: () => import('./ui/listarcobros/listarcobros.module').then( m => m.ListarcobrosPageModule), 
+    canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR'] }
+    
+  },
+  {
+    path: 'listarmultas',
+    loadChildren: () => import('./ui/listarmultas/listarmultas.module').then( m => m.ListarmultasPageModule), 
+    canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR'] }
+  },
+  {
     path: '**',
     redirectTo: 'login', 
     pathMatch: 'full'
   },
+  
+
   
 ];
 

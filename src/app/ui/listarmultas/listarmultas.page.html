@@ -1,0 +1,32 @@
+<app-header title="Lista de multas"></app-header>
+
+<ion-content>
+
+  <ion-card *ngFor="let multa of multas">
+
+    <ion-item-sliding>
+
+      <!-- Datos multa -->
+      <ion-item>
+        <ion-label>
+          <strong>Fecha vigencia: </strong>{{multa.fechaVigencia}}
+          <br>
+          <strong>Multa (Bs): </strong> {{multa.monto}}
+          <br>
+          <strong>Pagado: </strong> {{multa.estado}}
+        </ion-label>
+      </ion-item>
+
+    </ion-item-sliding>
+
+  </ion-card>
+
+  <div class="ion-padding">
+    <ion-button [disabled]="!estado" color="success" expand="block" (click)="imprimir()"
+      type="submit" class="ion-no-margin">
+      <ion-icon name="download-outline" slot="icon-only"></ion-icon>
+      Imprimir lista
+    </ion-button>
+  </div>
+
+</ion-content>

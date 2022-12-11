@@ -35,5 +35,12 @@
     </ion-item-sliding>
   
   </ion-card>
+
+  <div class="ion-padding">
+    <ion-button [disabled]="!estado" color="success" expand="block" (click)="imprimir()" type="submit" class="ion-no-margin">
+        <ion-icon name="download-outline" slot="icon-only"></ion-icon>
+        Imprimir lista
+    </ion-button>
+  </div>
   
 </ion-content>

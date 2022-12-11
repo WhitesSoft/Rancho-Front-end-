@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
 import { Reclamo } from 'src/app/models/reclamo';
 import ReclamoService from 'src/app/service/reclamo.service';
+import { ReportesService } from 'src/app/service/reportes.service';
 
 @Component({
   selector: 'app-listarreclamos',
@@ -11,11 +12,13 @@ import ReclamoService from 'src/app/service/reclamo.service';
 export class ListarreclamosPage implements OnInit {
 
   reclamos: Reclamo[] = [];
+  estado: boolean;
 
   constructor(
     private reclamoService: ReclamoService, 
     private toastController: ToastController, 
-    private alertController: AlertController
+    private alertController: AlertController,
+    private reportesService: ReportesService
   ) { }
 
   ngOnInit() {
@@ -27,12 +30,26 @@ export class ListarreclamosPage implements OnInit {
     this.reclamoService.listaReclamos().subscribe(
       data => {
         this.reclamos = data;
+        if(this.reclamos.length != 0){
+          this.estado = true;
+        }
       }, 
       err => {
         this.presentToast(err.error.mensaje);
       }
     );
 
+  }
+
+  imprimir(): void {
+    const encabezado = ["Detalle reclamo", "Fecha"];
+
+    var cuerpo: any[] = [];
+    for(let x of this.reclamos){
+      cuerpo.push([x.detalle, x.fecha]);
+    }
+
+    this.reportesService.imprimir(encabezado, cuerpo, "Listado de reclamos", true);
   }
 
   eliminarReclamo(id: number): void {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
 import { Usuario } from 'src/app/models/usuario';
+import { ReportesService } from 'src/app/service/reportes.service';
 import { UsuarioService } from 'src/app/service/usuario.service';
 
 @Component({
@@ -11,11 +12,13 @@ import { UsuarioService } from 'src/app/service/usuario.service';
 export class ListarusuariosPage implements OnInit {
 
   usuarios: Usuario[] = [];
+  estado: boolean;
 
   constructor(
     private usuarioService: UsuarioService, 
     private toastController: ToastController, 
-    private alertController: AlertController
+    private alertController: AlertController,
+    private reportesService: ReportesService
   ) { }
 
   ngOnInit() {
@@ -30,6 +33,9 @@ export class ListarusuariosPage implements OnInit {
     this.usuarioService.listaUsuarios().subscribe(
       data => {
         this.usuarios = data;
+        if(this.usuarios.length != 0){
+          this.estado = true;
+        }
       }, 
       err => {
         this.presentToast(err.error.mensaje);
@@ -73,6 +79,17 @@ export class ListarusuariosPage implements OnInit {
 
     await alert.present();
     
+  }
+
+  imprimir(): void {
+    const encabezado = ["Usuario", "Socio"];
+
+    var cuerpo: any[] = [];
+    for(let x of this.usuarios){
+      cuerpo.push([x.usuario, x.socio.nombres + " " + x.socio.apellidos]);
+    }
+
+    this.reportesService.imprimir(encabezado, cuerpo, "Listado de usuarios", true);
   }
 
   async presentToast(msj: string) {
