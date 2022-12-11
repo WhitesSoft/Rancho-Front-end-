@@ -85,14 +85,12 @@ export class CreateuserPage implements OnInit {
       mensaje: msg
     }
 
-
     //Crear socio
     const socio = new Socio(this.nombres, this.apellidos, this.cedula,
       this.correo, this.fechaNacimiento, this.direccion, this.foto, this.activo);
 
     //crear usuario  
     this.nuevoUsuario = new NuevoUsuario(user, pass, false, socio);
-
 
     this.authService.crear(this.nuevoUsuario).subscribe(
       data => {
