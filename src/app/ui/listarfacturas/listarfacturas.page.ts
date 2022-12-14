@@ -39,11 +39,11 @@ export class ListarfacturasPage implements OnInit {
   }
 
   imprimir(): void {
-    const encabezado = ["Razon social", "NIT", "Monto", "Fecha"];
+    const encabezado = ["Razon social", "NIT", "Monto", "Fecha", "Pagado"];
 
     var cuerpo: any[] = [];
     for(let x of this.facturas){
-      cuerpo.push([x.razonSocial, x.nit, x.monto, x.periodo]);
+      cuerpo.push([x.razonSocial, x.nit, x.monto, x.periodo, x.estado]);
     }
 
     this.reportesService.imprimir(encabezado, cuerpo, "Listado de facturas", true);

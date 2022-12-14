@@ -18,7 +18,7 @@
       </ion-menu-toggle>
 
       <!-- Administrador -->
-      <ion-accordion-group *ngIf="isLogged && isAdmin">
+      <ion-accordion-group *ngIf="isLogged && isAdmin" >
 
         <!-- Crear -->
         <ion-accordion value="first">
@@ -27,6 +27,15 @@
             <ion-label>Crear</ion-label>
           </ion-item>
           <div class="ion-padding" slot="content">
+
+             <!-- Crear tarifas -->
+             <ion-menu-toggle *ngIf="isLogged && isAdmin">
+              <ion-item routerLink="/createuser">
+                <ion-icon name="person-add-outline" slot="start"></ion-icon>
+                <ion-label>Nuevo asociado</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+
 
             <!-- Crear tarifas -->
             <ion-menu-toggle *ngIf="isLogged && isAdmin">

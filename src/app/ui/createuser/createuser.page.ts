@@ -81,7 +81,7 @@ export class CreateuserPage implements OnInit {
 
     let params = {
       email: this.correo,
-      asunto: "Rancho Norte | Usuario creado.",
+      asunto: "Rancho Norte | Cuenta asignada.",
       mensaje: msg
     }
 
@@ -98,7 +98,7 @@ export class CreateuserPage implements OnInit {
         //Subir db a firebase
         this.formSprache.value.imageUrl = img.value;
         this.codeCollection = this.db.collection('Usuarios');
-        this.codeCollection.doc(this.usuario).set(this.formSprache.value);
+        this.codeCollection.doc(this.nombres).set(this.formSprache.value);
 
         //Enviar correo
         this.httpClient.post('http://localhost:3000/envio', params).subscribe(
@@ -108,7 +108,7 @@ export class CreateuserPage implements OnInit {
         );
 
         this.presentToast(data.mensaje);
-        this.router.navigate(['/login']);
+        this.router.navigate(['/main']);
       },
       err => {
         this.presentToast(err.error.mensaje);
@@ -133,7 +133,7 @@ export class CreateuserPage implements OnInit {
     reader.onload = (event: any) => {
       this.url = event.target.result;
       const file = e.target.files[0];
-      const filepath = this.usuario + '1'; //+ this.formSprache.value.language; //nombre a la imagen
+      const filepath = this.nombres + "_" + this.apellidos; //+ this.formSprache.value.language; //nombre a la imagen
       const ref = this.storage.ref(filepath);
       const task = this.storage.upload(filepath, file);
       task.snapshotChanges().pipe(finalize(() => this.urlImage = ref.getDownloadURL())).subscribe();
