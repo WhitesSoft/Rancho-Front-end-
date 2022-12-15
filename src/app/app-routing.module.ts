@@ -24,7 +24,8 @@ const routes: Routes = [
   },
   {
     path: 'createuser',
-    loadChildren: () => import('./ui/createuser/createuser.module').then( m => m.CreateuserPageModule)
+    loadChildren: () => import('./ui/createuser/createuser.module').then( m => m.CreateuserPageModule), 
+    canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR'] }
   },
   {
     path: 'cambiarpassword/:id',
@@ -44,12 +45,12 @@ const routes: Routes = [
   {
     path: 'perfil',
     loadChildren: () => import('./ui/perfil/perfil.module').then( m => m.PerfilPageModule), 
-    canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR', 'USER'] }
+    canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR', 'LECTURADOR', 'PLOMERO', 'CAJERO', 'USER'] }
   },
   {
     path: 'listarmedidores',
     loadChildren: () => import('./ui/listarmedidores/listarmedidores.module').then( m => m.ListarmedidoresPageModule), 
-    canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR', 'LECTURADOR'] }
+    canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR', 'LECTURADOR', 'PLOMERO', 'CAJERO'] }
   },
   {
     path: 'listarmedidoresuser',

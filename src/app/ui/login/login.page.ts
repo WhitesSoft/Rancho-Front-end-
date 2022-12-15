@@ -53,28 +53,6 @@ export class LoginPage implements OnInit {
     this.password = '';
   }
 
-  imagePreview(e: any) {
-    var reader = new FileReader();
-    reader.readAsDataURL(e.target.files[0]);
-    reader.onload = (event: any) => {
-      this.url = event.target.result;
-      const file = e.target.files[0];
-      const filepath = 'juan/' + 'siu' ; //+ this.formSprache.value.language; //nombre a la imagen
-      const ref = this.storage.ref(filepath);
-      const task = this.storage.upload(filepath, file);
-      task.snapshotChanges().pipe(finalize(() => this.urlImage = ref.getDownloadURL())).subscribe();
-      //this.clickSend = false;
-      //setTimeout(() => { this.clickSend = false }, 5000);
-    }
-  }
-
-  subir(img: any): void{
-    console.log(img.value);
-    this.formSprache.value.imageUrl = img.value;
-    this.codeCollection = this.db.collection('FirstCollection');
-    this.codeCollection.doc('javi').set(this.formSprache.value);
-  }
-
   iniciarSesion(): void {
     //Obtenemos los datos ingresados por el usuari
     this.loginUsuario = new LoginUsuario(this.usuario, this.password);

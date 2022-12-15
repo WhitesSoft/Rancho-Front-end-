@@ -18,7 +18,12 @@
       </ion-menu-toggle>
 
       <!-- Administrador -->
-      <ion-accordion-group *ngIf="isLogged && isAdmin" >
+      <ion-accordion-group 
+        *ngIf="
+        (isLogged && isAdmin) ||
+        (isLogged && isCajero) ||
+        (isLogged && isPlomero) ||
+        (isLogged && isLecturador)" >
 
         <!-- Crear -->
         <ion-accordion value="first">
@@ -59,7 +64,10 @@
             </ion-menu-toggle>
 
             <!-- Crear multas -->
-            <ion-menu-toggle *ngIf="isLogged && isAdmin">
+            <ion-menu-toggle 
+              *ngIf="
+              (isLogged && isAdmin) ||
+              (isLogged && isLecturador)">
               <ion-item routerLink="/asignarmultas">
                 <ion-icon name="skull-outline" slot="start"></ion-icon>
                 <ion-label>Asignar multas</ion-label>
@@ -93,7 +101,12 @@
               </ion-item>
             </ion-menu-toggle>
 
-            <ion-menu-toggle *ngIf="isLogged && isAdmin">
+            <ion-menu-toggle 
+              *ngIf="
+                (isLogged && isAdmin) ||
+                (isLogged && isCajero) ||
+                (isLogged && isPlomero) ||
+                (isLogged && isLecturador)">
               <ion-item routerLink="/listarmedidores">
                 <ion-icon name="scale-outline" slot="start"></ion-icon>
                 <ion-label>Listar medidores</ion-label>
@@ -114,7 +127,12 @@
               </ion-item>
             </ion-menu-toggle>
 
-            <ion-menu-toggle *ngIf="isLogged && isAdmin">
+            <ion-menu-toggle 
+              *ngIf="
+                (isLogged && isAdmin) ||
+                (isLogged && isCajero) ||
+                (isLogged && isPlomero) ||
+                (isLogged && isLecturador)">
               <ion-item routerLink="/listarcomunicados">
                 <ion-icon name="clipboard-outline" slot="start"></ion-icon>
                 <ion-label>Listar comunicados</ion-label>
