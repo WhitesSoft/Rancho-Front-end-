@@ -1,0 +1,35 @@
+<app-header title="Mis multas"></app-header>
+
+<ion-content *ngIf="estado">
+
+  <ion-card>
+    <ion-card-header>
+
+      <ion-card *ngFor="let multa of multas">
+
+        <ion-item>
+          <ion-label>
+            <strong> Fecha vigencia a pagar: </strong> {{multa.fechaVigencia}}
+            <br>
+            <strong> Monto a pagar: </strong> {{multa.monto}} Bs.
+          </ion-label>
+
+          <ion-button fill="clear" (click)="pagarMulta(multa.id)">Pagar multa</ion-button>
+        </ion-item>
+
+      </ion-card>
+
+    </ion-card-header>
+  </ion-card>
+
+</ion-content>
+
+<ion-content *ngIf="!estado">
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title> <strong>No tienes multas</strong> </ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+</ion-content>

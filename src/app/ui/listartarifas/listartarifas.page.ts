@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
 import * as moment from 'moment';
 import { Tarifa } from 'src/app/models/tarifa';
+import { ReportesService } from 'src/app/service/reportes.service';
 import { TarifaService } from 'src/app/service/tarifa.service';
 
 @Component({
@@ -12,14 +13,15 @@ import { TarifaService } from 'src/app/service/tarifa.service';
 export class ListartarifasPage implements OnInit {
 
   tarifas: Tarifa[] = [];
-
+  estado: boolean;
   tarifasFechas: any[] = [];
   fechaFormateada: string;
 
   constructor(
     private tarifaService: TarifaService, 
     private toastController: ToastController, 
-    private alertController: AlertController
+    private alertController: AlertController,
+    private reportesService: ReportesService
   ) { }
 
   ngOnInit() {
@@ -34,11 +36,25 @@ export class ListartarifasPage implements OnInit {
     this.tarifaService.listaTarifas().subscribe(
       data => {
         this.tarifas = data;  
+        if(this.tarifas.length != 0){
+          this.estado = true;
+        }
       }, 
       err => {
         this.presentToast(err.error.mensaje);
       }
     );
+  }
+
+  imprimir(): void {
+    const encabezado = ["Costo unitario", "Consumo maximo", "Fecha de inicio"];
+
+    var cuerpo: any[] = [];
+    for(let x of this.tarifas){
+      cuerpo.push([x.costoUnitario, x.consumoMaximo, x.fechaInicio]);
+    }
+
+    this.reportesService.imprimir(encabezado, cuerpo, "Listado de tarifas", true);
   }
 
   eliminarTarifa(id: number): void {

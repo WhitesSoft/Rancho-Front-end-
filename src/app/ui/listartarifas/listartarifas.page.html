@@ -2,42 +2,53 @@
 
 <ion-content>
 
-  <ion-card *ngFor="let tarifa of tarifas">
+    <ion-card *ngFor="let tarifa of tarifas">
 
-      <ion-item-sliding>
+        <ion-item-sliding>
 
-          <!-- Ver detalles -->
-          <ion-item-options side="start">
-              <ion-item-option routerLink="/detalletarifa/{{tarifa.id}}">
-                  <ion-icon name="eye" slot="icon-only"></ion-icon>
-              </ion-item-option>
-          </ion-item-options>
+            <!-- Ver detalles -->
+            <ion-item-options side="start">
+                <ion-item-option routerLink="/detalletarifa/{{tarifa.id}}">
+                    <ion-icon name="eye" slot="icon-only"></ion-icon>
+                </ion-item-option>
+            </ion-item-options>
 
-          <!-- Datos tarifa -->
-          <ion-item>
-              <ion-icon name="logo-tux"></ion-icon>
-              <ion-label>
-                  {{tarifa.fechaInicio}}
-              </ion-label>
-          </ion-item>
+            <!-- Datos tarifa -->
+            <ion-item>
+                <ion-icon name="layers-outline" slot="start"></ion-icon>
+                <ion-label>
+                    {{tarifa.fechaInicio}}
+                </ion-label>
+            </ion-item>
 
 
-          <ion-item-options side="end">
+            <ion-item-options side="end">
 
-              <!-- Editar -->
-              <ion-item-option color="warning" routerLink="/editartarifa/{{tarifa.id}}">
-                  <ion-icon name="create" slot="icon-only"></ion-icon>
-              </ion-item-option>
+                <!-- Editar -->
+                <ion-item-option color="warning"
+                    routerLink="/editartarifa/{{tarifa.id}}">
+                    <ion-icon name="create" slot="icon-only"></ion-icon>
+                </ion-item-option>
 
-              <!-- Eliminar -->
-              <ion-item-option color="danger" (click)="borrarConfirm(tarifa.id)">
-                  <ion-icon name="trash" slot="icon-only"></ion-icon>
-              </ion-item-option>
+                <!-- Eliminar -->
+                <ion-item-option color="danger"
+                    (click)="borrarConfirm(tarifa.id)">
+                    <ion-icon name="trash" slot="icon-only"></ion-icon>
+                </ion-item-option>
 
-          </ion-item-options>
+            </ion-item-options>
 
-      </ion-item-sliding>
+        </ion-item-sliding>
 
-  </ion-card>
+    </ion-card>
+
+    <div class="ion-padding">
+        <ion-button [disabled]="!estado" color="success" expand="block"
+            (click)="imprimir()"
+            type="submit" class="ion-no-margin">
+            <ion-icon name="download-outline" slot="icon-only"></ion-icon>
+            Imprimir lista
+        </ion-button>
+    </div>
 
 </ion-content>

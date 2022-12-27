@@ -1,9 +1,68 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>perfil</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header title="Perfil"></app-header>
 
-<ion-content>
+<ion-content *ngIf="usuario">
+
+    <ion-card>
+        <ion-card-header>
+
+            <ion-card-title> <strong>Información del socio: </strong> </ion-card-title>
+            <div class="img-container">
+                <img alt="Silhouette of mountains" src="{{usuario.socio.foto}}" width="100" height="100" />
+            </div>
+            <ion-card-subtitle> <strong>Nombres: </strong> {{usuario.socio.nombres}} </ion-card-subtitle>
+            <ion-card-subtitle> <strong>Apellidos: </strong> {{usuario.socio.apellidos}} </ion-card-subtitle>
+            <ion-card-subtitle> <strong>Carnet de identidad: </strong> {{usuario.socio.cedula}} </ion-card-subtitle>
+            <ion-card-subtitle> <strong>Correo electronico: </strong> {{usuario.socio.correo}} </ion-card-subtitle>
+            <ion-card-subtitle> <strong>Fecha de nacimiento: </strong> {{usuario.socio.fechaNacimiento.substring(0, 10)}} </ion-card-subtitle>
+            <ion-card-subtitle> <strong>Direccion: </strong> {{usuario.socio.direccion}} </ion-card-subtitle>
+            
+            <br>
+            <ion-card-title> <strong>Informacion del usuario: </strong> </ion-card-title>
+            <ion-card-subtitle> <strong>Usuario: </strong> {{usuario.usuario}} </ion-card-subtitle>
+            <ion-card-subtitle> <strong>Password: </strong> {{usuario.password}} </ion-card-subtitle>
+            <br>
+
+            <ion-card-title> <strong>Roles: </strong> </ion-card-title>
+            <ion-card *ngFor="let rol of roles">
+                <ion-item-sliding>
+                    <!-- Roles -->
+                    <ion-item color="primary">
+                        <ion-label>
+                            {{rol}}
+                        </ion-label>
+                    </ion-item>
+
+                </ion-item-sliding>
+            </ion-card>
+
+        </ion-card-header>
+    </ion-card>
+
+</ion-content>
+
+<ion-content *ngIf="!usuario">
+
+    <ion-card>
+        <div class="img-container">
+            <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" width="100" height="100" />
+        </div>
+        <ion-card-header>
+            <ion-card-title>
+                <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+            </ion-card-title>
+            <ion-card-title>
+                <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+            </ion-card-title>
+            <ion-card-title>
+                <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+            </ion-card-title>
+            <ion-card-title>
+                <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+            </ion-card-title>
+            <ion-card-title>
+                <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+            </ion-card-title>
+        </ion-card-header>
+    </ion-card>
 
 </ion-content>

@@ -1,0 +1,35 @@
+<app-header title="Informacion del reclamo"></app-header>
+
+<ion-content *ngIf="reclamo">
+
+  <ion-card>
+      <ion-card-header>
+          <ion-card-title> <strong>Detalle: </strong> {{reclamo.detalle}} </ion-card-title>
+          <ion-card-title> <strong>Fecha: </strong> {{reclamo.fecha}} </ion-card-title>
+          <ion-card-title> <strong>Estado: </strong> {{estado}} </ion-card-title>
+          <ion-card-title> <strong>Socio: </strong> {{nombreSocio}} </ion-card-title>
+      </ion-card-header>
+      <div class="ion-padding" *ngIf="!isUser">
+        <ion-button color="success" (click)="atender(reclamo.id)" *ngIf="!estadoReclamo" expand="block" type="submit" class="ion-no-margin">
+          <ion-icon name="checkmark-done-outline"></ion-icon>
+            Atender reclamo
+        </ion-button>
+      </div>
+  </ion-card>
+
+
+</ion-content>
+
+<ion-content *ngIf="!reclamo">
+
+  <ion-card>
+      <ion-card-header>
+          <ion-card-title> <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text> </ion-card-title>
+          <ion-card-title> <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text> </ion-card-title>
+          <ion-card-title> <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text> </ion-card-title>
+          <ion-card-title> <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text> </ion-card-title>
+          <ion-card-title> <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text> </ion-card-title>
+      </ion-card-header>
+  </ion-card>
+
+</ion-content>

@@ -1,0 +1,36 @@
+<app-header title="Mis reclamos"></app-header>
+
+<ion-content>
+
+  <ion-card *ngFor="let reclamo of reclamos">
+
+    <ion-item-sliding>
+
+      <!-- Ver detalles -->
+      <ion-item-options side="start">
+        <ion-item-option routerLink="/detallereclamo/{{reclamo.id}}">
+          <ion-icon name="eye" slot="icon-only"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+
+      <!-- Datos reclamo -->
+      <ion-item>
+        <ion-icon name="alert-circle-outline" slot="start"></ion-icon>
+        <ion-label>
+          {{reclamo.detalle}}
+        </ion-label>
+      </ion-item>
+
+      <!-- Editar -->
+      <ion-item-options side="end">
+        <ion-item-option color="warning" routerLink="/editarreclamo/{{reclamo.id}}">
+          <ion-icon name="create" slot="icon-only"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+
+    </ion-item-sliding>
+
+  </ion-card>
+
+</ion-content>
+

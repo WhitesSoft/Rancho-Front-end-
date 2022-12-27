@@ -18,7 +18,7 @@ export class CrearmedidorPage implements OnInit {
 
   serial = '';
   marca = '';
-  registroInicio = '';
+  registroInicio = '0';
   fechaInstalacion = '';
   
 

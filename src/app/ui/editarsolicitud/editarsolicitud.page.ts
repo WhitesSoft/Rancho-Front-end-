@@ -39,10 +39,11 @@ export class EditarsolicitudPage implements OnInit {
     //obtenemos el id
     const id = this.activatedRoute.snapshot.paramMap.get('id');
 
+    this.solicitud.fecha = new Date().toISOString().split('T')[0];
     this.solicitudService.actualizarSolicitud(Number(id), this.solicitud).subscribe(
       data => {
         this.presentToast('Solicitud actualizada');
-        this.router.navigate(['/listarsolicitudesuser']);
+        this.router.navigate(['/main']);
       }, 
       err => {
         this.presentToast(err.error.mensaje);

@@ -14,13 +14,23 @@ const routes: Routes = [
     loadChildren: () => import('./ui/login/login.module').then( m => m.LoginPageModule)
   },
   {
+    path: 'invitado',
+    loadChildren: () => import('./ui/invitado/invitado.module').then( m => m.InvitadoPageModule)
+  },
+  {
     path: 'main',
     loadChildren: () => import('./ui/main/main.module').then( m => m.MainPageModule), 
     canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR', 'LECTURADOR', 'PLOMERO', 'CAJERO', 'USER'] }
   },
   {
     path: 'createuser',
-    loadChildren: () => import('./ui/createuser/createuser.module').then( m => m.CreateuserPageModule)
+    loadChildren: () => import('./ui/createuser/createuser.module').then( m => m.CreateuserPageModule), 
+    canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR'] }
+  },
+  {
+    path: 'cambiarpassword/:id',
+    loadChildren: () => import('./ui/cambiarpassword/cambiarpassword.module').then( m => m.CambiarpasswordPageModule), 
+    canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR', 'LECTURADOR', 'PLOMERO', 'CAJERO', 'USER'] }
   },
   {
     path: 'listarsocios',
@@ -35,12 +45,12 @@ const routes: Routes = [
   {
     path: 'perfil',
     loadChildren: () => import('./ui/perfil/perfil.module').then( m => m.PerfilPageModule), 
-    canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR', 'USER'] }
+    canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR', 'LECTURADOR', 'PLOMERO', 'CAJERO', 'USER'] }
   },
   {
     path: 'listarmedidores',
     loadChildren: () => import('./ui/listarmedidores/listarmedidores.module').then( m => m.ListarmedidoresPageModule), 
-    canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR', 'LECTURADOR'] }
+    canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR', 'LECTURADOR', 'PLOMERO', 'CAJERO'] }
   },
   {
     path: 'listarmedidoresuser',
@@ -168,14 +178,63 @@ const routes: Routes = [
     canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR', 'LECTURADOR', 'PLOMERO', 'CAJERO', 'USER'] }
   },
   {
+    path: 'asignarmultas',
+    loadChildren: () => import('./ui/asignarmultas/asignarmultas.module').then( m => m.AsignarmultasPageModule),
+    canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR', 'LECTURADOR'] }
+  },
+  {
+    path: 'listarmultasuser',
+    loadChildren: () => import('./ui/listarmultasuser/listarmultasuser.module').then( m => m.ListarmultasuserPageModule),
+    canActivate: [guard], data: { requiredRoles: ['USER'] }
+  },
+  {
+    path: 'crearreclamo',
+    loadChildren: () => import('./ui/crearreclamo/crearreclamo.module').then( m => m.CrearreclamoPageModule), 
+    canActivate: [guard], data: { requiredRoles: ['LECTURADOR', 'PLOMERO', 'CAJERO', 'USER'] }
+  },
+  {
+    path: 'detallereclamo/:id',
+    loadChildren: () => import('./ui/detallereclamo/detallereclamo.module').then( m => m.DetallereclamoPageModule), 
+    canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR', 'LECTURADOR', 'PLOMERO', 'CAJERO', 'USER'] }
+  },
+  {
+    path: 'editarreclamo/:id',
+    loadChildren: () => import('./ui/editarreclamo/editarreclamo.module').then( m => m.EditarreclamoPageModule),
+    canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR', 'LECTURADOR', 'PLOMERO', 'CAJERO', 'USER'] }
+  },
+  {
+    path: 'listarreclamos',
+    loadChildren: () => import('./ui/listarreclamos/listarreclamos.module').then( m => m.ListarreclamosPageModule), 
+    canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR', 'LECTURADOR', 'PLOMERO', 'CAJERO'] }
+  },
+  {
+    path: 'listarreclamosuser',
+    loadChildren: () => import('./ui/listarreclamosuser/listarreclamosuser.module').then( m => m.ListarreclamosuserPageModule), 
+    canActivate: [guard], data: { requiredRoles: ['USER'] }
+  }, 
+  {
+    path: 'listarfacturas',
+    loadChildren: () => import('./ui/listarfacturas/listarfacturas.module').then( m => m.ListarfacturasPageModule), 
+    canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR'] }
+  },
+  {
+    path: 'listarcobros',
+    loadChildren: () => import('./ui/listarcobros/listarcobros.module').then( m => m.ListarcobrosPageModule), 
+    canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR'] }
+    
+  },
+  {
+    path: 'listarmultas',
+    loadChildren: () => import('./ui/listarmultas/listarmultas.module').then( m => m.ListarmultasPageModule), 
+    canActivate: [guard], data: { requiredRoles: ['ADMINISTRADOR'] }
+  },
+  {
     path: '**',
     redirectTo: 'login', 
     pathMatch: 'full'
   },
   
-  
-  
-  
+
   
 ];
 

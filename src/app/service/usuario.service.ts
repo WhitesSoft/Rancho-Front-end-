@@ -25,18 +25,19 @@ export class UsuarioService {
     return this.httpClient.get<Usuario>(this.usuarioURL + `detalles/${id}`);
   }
 
-  //crear usuario
-  public crearUsuario(usuario: Usuario): Observable<any> {
-    return this.httpClient.post<any>(this.usuarioURL + 'crear', usuario);
-  }
-
   //actualizar usuario
   public actualizarUsuario(id: number, usuario: Usuario): Observable<any> {
     return this.httpClient.put<any>(this.usuarioURL + `actualizar/${id}`, usuario);
+  }
+
+  //actualizar usuario password
+  public actualizarUsuarioPassword(id: number, usuario: Usuario): Observable<any> {
+      return this.httpClient.put<any>(this.usuarioURL + `actualizarpassword/${id}`, usuario);
   }
 
   //borrar usuario
   public eliminarUsuario(id: number): Observable<any> {
     return this.httpClient.delete<any>(this.usuarioURL + `eliminar/${id}`);
   }
+  
 }

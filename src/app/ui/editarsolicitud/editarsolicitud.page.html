@@ -13,12 +13,6 @@
           <ion-input required type="text" name="detalle" [(ngModel)]="solicitud.detalle"></ion-input>
         </ion-item>
 
-        <ion-item>
-          <ion-label position="floating">Fecha: <ion-text color="danger">*</ion-text>
-          </ion-label>
-          <ion-input required type="date" name="fecha" [(ngModel)]="solicitud.fecha"></ion-input>
-        </ion-item>
-
         <div class="ion-padding">
           <ion-button color="success" expand="block" type="submit" class="ion-no-margin" [disabled]="!f.valid">
             <ion-icon name="create" slot="icon-only"></ion-icon>

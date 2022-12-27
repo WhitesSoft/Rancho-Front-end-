@@ -11,6 +11,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/comp
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -21,7 +22,7 @@ import { finalize } from 'rxjs/operators';
 export class CreateuserPage implements OnInit {
 
   formSprache!: FormGroup;
-  codeCollection! : AngularFirestoreCollection;
+  codeCollection!: AngularFirestoreCollection;
 
   nuevoUsuario: NuevoUsuario;
   loginUsuario: LoginUsuario;
@@ -34,7 +35,7 @@ export class CreateuserPage implements OnInit {
   foto: string = '';
   activo: boolean = true;
   fechaNacimiento: string = '';
-  usuario : string = '';
+  usuario: string = '';
   password: string = '';
 
   isLogged = false;
@@ -48,13 +49,14 @@ export class CreateuserPage implements OnInit {
   };
 
   constructor(
-    private authService: AuthService, 
+    private authService: AuthService,
     private tokenService: TokenService,
-    private toastController: ToastController, 
-    private router: Router, 
+    private toastController: ToastController,
+    private router: Router,
     private storage: AngularFireStorage,
-    private formbuilder: FormBuilder, 
-    private db: AngularFirestore) { }
+    private formbuilder: FormBuilder,
+    private db: AngularFirestore,
+    private httpClient: HttpClient) { }
 
   ngOnInit() {
     this.formSprache = this.formbuilder.group({
@@ -63,15 +65,32 @@ export class CreateuserPage implements OnInit {
   }
 
   crearUsuario(img: any): void {
-    
+
     this.foto = img.value;
 
+    //Obtenemos un user y un password  
+    var user = this.nombres.substring(0, 2) + this.apellidos.substring(0, 2) + this.generatePasswordRand(3);
+    var pass = this.generatePasswordRand(6);
+    
+    //Datos para enviar el correo
+    var msg = "Su cuenta fue creado exitosamente, se le asigno los siguientes datos para su acceso \n\n"
+      + "Usuario: " + user
+      + "\nPassword: " + pass
+      + "\n\n Por favor no comparta a nadie estos datos."
+      + "\n RANCHO NORTE";
+
+    let params = {
+      email: this.correo,
+      asunto: "Rancho Norte | Cuenta asignada.",
+      mensaje: msg
+    }
+
     //Crear socio
-    const socio = new Socio(this.nombres, this.apellidos, this.cedula, 
-      this.correo, this.fechaNacimiento, this.direccion, this.foto , this.activo);
+    const socio = new Socio(this.nombres, this.apellidos, this.cedula,
+      this.correo, this.fechaNacimiento, this.direccion, this.foto, this.activo);
 
     //crear usuario  
-    this.nuevoUsuario = new NuevoUsuario(this.usuario, this.password, socio);
+    this.nuevoUsuario = new NuevoUsuario(user, pass, false, socio);
 
     this.authService.crear(this.nuevoUsuario).subscribe(
       data => {
@@ -79,17 +98,33 @@ export class CreateuserPage implements OnInit {
         //Subir db a firebase
         this.formSprache.value.imageUrl = img.value;
         this.codeCollection = this.db.collection('Usuarios');
-        this.codeCollection.doc(this.usuario).set(this.formSprache.value);
+        this.codeCollection.doc(this.nombres).set(this.formSprache.value);
+
+        //Enviar correo
+        this.httpClient.post('http://localhost:3000/envio', params).subscribe(
+          data => {
+            this.presentToast("Correo enviado.")
+          }
+        );
 
         this.presentToast(data.mensaje);
-        this.router.navigate(['/login']);
+        this.router.navigate(['/main']);
       },
       err => {
         this.presentToast(err.error.mensaje);
       }
     );
 
-   
+
+  }
+
+  generatePasswordRand(tam: number) {
+    var pass = "";
+    var characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    for (let i = 0; i < tam; i++) {
+      pass += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return pass;
   }
 
   imagePreview(e: any) {
@@ -98,7 +133,7 @@ export class CreateuserPage implements OnInit {
     reader.onload = (event: any) => {
       this.url = event.target.result;
       const file = e.target.files[0];
-      const filepath = 'juan/' + 'siu' ; //+ this.formSprache.value.language; //nombre a la imagen
+      const filepath = this.nombres + "_" + this.apellidos; //+ this.formSprache.value.language; //nombre a la imagen
       const ref = this.storage.ref(filepath);
       const task = this.storage.upload(filepath, file);
       task.snapshotChanges().pipe(finalize(() => this.urlImage = ref.getDownloadURL())).subscribe();

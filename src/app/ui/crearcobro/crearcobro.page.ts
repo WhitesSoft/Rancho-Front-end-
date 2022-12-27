@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import * as moment from 'moment';
 import { Cobro } from 'src/app/models/cobro';
 import { Factura } from 'src/app/models/factura';
@@ -23,7 +23,8 @@ export class CrearcobroPage implements OnInit {
     private cobroSerive: CobroService,
     private facturaService: FacturaService,
     private activatedRoute: ActivatedRoute,
-    private toastController: ToastController, 
+    private toastController: ToastController,
+    private alertController: AlertController,
     private router: Router
   ) { }
 
@@ -53,48 +54,59 @@ export class CrearcobroPage implements OnInit {
 
   }
 
-  Pagar(): void {
+
+  async Pagar() {
 
     //accedemos al id que aparece en el url
     const id = this.activatedRoute.snapshot.paramMap.get('id');
 
+    const alert = await this.alertController.create({
+      header: 'Confirmar',
+      message: '¿Seguro que deseas pagar la factura?',
+      buttons: [
+        {
+          text: 'Aceptar',
+          handler: () => {
 
-    //formateamos la fecha
-    moment.locale('es');
-    var fechaHora = moment(new Date()).format('MMMM Do YYYY, h:mm:ss a');
-   
+            //formateamos la fecha
+            moment.locale('es');
+            var fechaHora = moment(new Date()).format('MMMM Do YYYY, h:mm:ss a');
 
-    //factura
-    var nuevaFactura = new Factura(this.factura.razonSocial, this.factura.nit, this.factura.periodo, 
-      this.factura.monto, false);
-     
-    var monto = this.factura.monto;
-    
-    console.log(monto);
-    
-    
-    console.log(nuevaFactura);
-      
+            //Obtenemos el monto de la factura a pagar
+            var monto = this.factura.monto;
 
-    //creamos nuestro cobro
-    const cobro = new Cobro(fechaHora, monto, nuevaFactura);
+            //creamos nuestro cobro
+            const cobro = new Cobro(fechaHora, monto, this.factura);
+            this.cobroSerive.crearCobro(cobro).subscribe(
+              data => {
 
-    this.cobroSerive.crearCobro(cobro).subscribe(
-      data => {
-        //Actualizamos la factura
-        // const facturaActualizada = new Factura(this.factura.razonSocial, this.factura.nit, this.factura.periodo, 
-        //   this.factura.monto, true);
-        this.factura.estado = true;  
+                //Actualizamos la factura
+                this.factura.estado = true;
+                this.facturaService.actualizarFactura(Number(id), this.factura).subscribe();
 
-        this.facturaService.actualizarFactura(Number(id), this.factura).subscribe();
-        
-        this.presentToast('Pago realizado');
-        this.router.navigate(['/main']);
-      }, 
-      err => {
-        console.log(err); 
-      }
-    );
+                this.presentToast('Pago realizado');
+                this.router.navigate(['/main']);
+
+              },
+              err => {
+                console.log(err);
+              }
+            );
+
+          }
+        },
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
 
   }
 
